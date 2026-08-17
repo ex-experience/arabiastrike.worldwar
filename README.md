@@ -40,6 +40,14 @@ python ci/preflight.py
 
 See `docs/BUILD_AND_RUN.md` for client/server build commands.
 
+When a complete UE 5.8 or 5.8.1 installation becomes available, resume the blocked real-build pipeline with:
+
+```powershell
+.\BuildScripts\resume_after_ue58.ps1
+```
+
+Runtime results must follow `RuntimeEvidence/README.md`; no compile, PIE, multiplayer, package or Pixel Streaming success is inferred from repository checks. Production online prerequisites and the current binary-asset queue are tracked in `docs/ONLINE_PRODUCTION_READINESS.md` and `docs/ASSET_GAP_INVENTORY.md`.
+
 
 ## Phase 2 — Playable Combat Foundation
 Adds data-driven weapons, replicated ammo/reload/projectiles, interaction, pilotable vehicle scaffold, AI pressure, and replicated Jeddah mission progression. See `docs/PHASE2_PLAYABLE_COMBAT.md`.
