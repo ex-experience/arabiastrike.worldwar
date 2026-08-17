@@ -8,4 +8,5 @@ void AASPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLi
     DOREPLIFETIME(AASPlayerState, Kills);
     DOREPLIFETIME(AASPlayerState, Deaths);
     DOREPLIFETIME(AASPlayerState, XP);
+    DOREPLIFETIME(AASPlayerState, CurrentDistrict);
 }

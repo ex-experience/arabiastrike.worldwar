@@ -8,7 +8,8 @@ public class ArabiaStrikeWorldWar : ModuleRules
         {
             "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput",
             "GameplayTags", "GameplayTasks", "AIModule", "NavigationSystem",
-            "UMG", "Slate", "SlateCore", "NetCore", "PhysicsCore"
+            "UMG", "Slate", "SlateCore", "NetCore", "PhysicsCore", "PCG",
+            "ChaosVehicles", "Water", "LevelSequence", "MovieScene"
         });
         PrivateDependencyModuleNames.AddRange(new string[] { "Niagara" });
     }

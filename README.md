@@ -1,4 +1,4 @@
-# ARABIA STRIKE: WORLD WAR — UE5.8 Phase 3 Tactical Warfare
+# ARABIA STRIKE: WORLD WAR — UE5.8 Phase 5 JEDDAH LIVING CITY
 
 
 Unreal Engine 5.8 C++ production starter for a server-authoritative, 360-degree online action game.
@@ -47,3 +47,13 @@ Adds data-driven weapons, replicated ammo/reload/projectiles, interaction, pilot
 
 ## Phase 3 additions
 See `docs/PHASE3_TACTICAL_WARFARE.md`. The repository now includes authoritative interaction, co-op downed/revive, loadout switching, grenades, suppression/flanking AI, Hummer turret combat, helicopter pressure, boss weak points and HUD query hooks.
+
+
+## Phase 4 — JEDDAH WORLD
+
+This package now includes the first scalable-city runtime layer: World Partition detection, district state, replicated time/weather, traffic, civilians, dynamic encounters and PCG hooks. Binary city assets and the production `.umap` must be authored in Unreal Editor 5.8; see `docs/JEDDAH_WORLD_EDITOR_CHECKLIST.md`.
+
+
+## Phase 5 — JEDDAH LIVING CITY + CINEMATIC WORLD
+
+Adds replicated factions, security escalation, civilian and traffic reactions, destruction states, Data Layer orchestration hooks, boats/waterfront foundations, Chaos Hummer integration, authoritative living-world events, synchronized cinematic cues and world/network budgets. Binary city, Chaos, Data Layer, Water and Level Sequence assets must be authored in Unreal Engine 5.8. See `docs/PHASE5_JEDDAH_LIVING_CITY.md`.

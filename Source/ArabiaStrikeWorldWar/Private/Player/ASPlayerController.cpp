@@ -1,5 +1,6 @@
 #include "Player/ASPlayerController.h"
 #include "Player/ASCharacter.h"
+#include "Player/ASPlayerState.h"
 #include "Game/ASGameMode.h"
 #include "Combat/ASHealthComponent.h"
 #include "Combat/ASWeaponComponent.h"
@@ -16,3 +17,5 @@ static AASMissionDirector* AS_FindMissionDirector(const UObject* WorldContext){r
 EASMissionPhase AASPlayerController::GetMissionPhase()const{const AASMissionDirector*D=AS_FindMissionDirector(this);return D?D->GetPhase():EASMissionPhase::Insertion;}
 int32 AASPlayerController::GetRescuedHostageCount()const{const AASMissionDirector*D=AS_FindMissionDirector(this);return D?D->GetRescuedHostages():0;}
 int32 AASPlayerController::GetRequiredHostageCount()const{const AASMissionDirector*D=AS_FindMissionDirector(this);return D?D->GetRequiredHostages():0;}
+
+EASCityDistrict AASPlayerController::GetCurrentDistrict()const{const AASPlayerState*PS=GetPlayerState<AASPlayerState>();return PS?PS->CurrentDistrict:EASCityDistrict::Corniche;}
