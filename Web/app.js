@@ -25,6 +25,7 @@ function cacheUi() {
   ui.playButton = document.querySelector("#play-button");
   ui.launchHint = document.querySelector("#launch-hint");
   ui.clientProfile = document.querySelector("#client-profile");
+  ui.inputDevices = document.querySelector("#input-devices");
   ui.offlineToast = document.querySelector("#offline-toast");
   ui.streamExperience = document.querySelector("#stream-experience");
   ui.streamFrame = document.querySelector("#stream-frame");
@@ -36,6 +37,28 @@ function detectClientProfile() {
   const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
   const compactViewport = window.matchMedia("(max-width: 760px)").matches;
   ui.clientProfile.textContent = coarsePointer || compactViewport ? "MOBILE / TOUCH" : "DESKTOP";
+  updateInputDevices();
+}
+
+function updateInputDevices() {
+  const inputDevices = [];
+  const touchReady = navigator.maxTouchPoints > 0 || window.matchMedia("(any-pointer: coarse)").matches;
+  const precisionPointerReady = window.matchMedia("(any-pointer: fine)").matches;
+  const connectedGamepads = typeof navigator.getGamepads === "function"
+    ? Array.from(navigator.getGamepads()).filter(Boolean)
+    : [];
+
+  if (touchReady) {
+    inputDevices.push("TOUCH");
+  }
+  if (precisionPointerReady) {
+    inputDevices.push("KB/MOUSE");
+  }
+  if (connectedGamepads.length > 0) {
+    inputDevices.push("GAMEPAD");
+  }
+
+  ui.inputDevices.textContent = inputDevices.length > 0 ? inputDevices.join(" + ") : "KEYBOARD READY";
 }
 
 function resolveStreamingEndpoint() {
@@ -185,6 +208,8 @@ function bindEvents() {
   window.addEventListener("online", probeStreamingBackend);
   window.addEventListener("offline", () => setConnectionState("offline"));
   window.addEventListener("resize", detectClientProfile, { passive: true });
+  window.addEventListener("gamepadconnected", updateInputDevices);
+  window.addEventListener("gamepaddisconnected", updateInputDevices);
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !ui.streamExperience.hidden) {
       closeStream();

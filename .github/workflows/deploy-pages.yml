@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - Web/**
+      - ci/preflight_web_delivery.py
       - .github/workflows/deploy-pages.yml
   workflow_dispatch:
 
@@ -27,14 +28,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
       - name: Validate web launcher
-        shell: bash
-        run: |
-          test -f Web/index.html
-          test -f Web/app.css
-          test -f Web/app.js
-          ! grep -RInE '(localhost|127\.0\.0\.1)' Web
-          ! grep -InE '(src|href)="/' Web/index.html
+        run: python ci/preflight_web_delivery.py
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

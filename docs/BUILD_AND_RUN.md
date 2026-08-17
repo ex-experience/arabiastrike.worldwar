@@ -26,6 +26,14 @@ PIE recommendation for the first test:
 
 A dedicated server build may require an Unreal Engine source build/toolchain appropriate to your environment and target.
 
+## Dual delivery validation
+
+Web zero-install and native delivery share the same Unreal gameplay project and are gated independently. See `docs/DELIVERY_TRACKS.md` for Win64, Android, iOS, and Pixel Streaming prerequisites.
+
+```powershell
+.\BuildScripts\verify_delivery_tracks.ps1 -UERoot "D:\\UE_5.8"
+```
+
 ## GitHub Actions
 
 `repository-preflight` runs on GitHub-hosted runners and does not pretend to compile Unreal.

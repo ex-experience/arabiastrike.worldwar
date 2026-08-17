@@ -24,6 +24,7 @@ jobs:
           python ci/preflight_phase4.py
           python ci/preflight_phase5.py
           python ci/static_cpp_sanity.py
+          python ci/preflight_native_delivery.py
       - name: Build client
         shell: powershell
         run: .\BuildScripts\build_win64.ps1 -UERoot "$env:UE_ROOT"
@@ -48,6 +49,7 @@ jobs:
           python ci/preflight_phase4.py
           python ci/preflight_phase5.py
           python ci/static_cpp_sanity.py
+          python ci/preflight_native_delivery.py
       - name: Build dedicated server
         shell: powershell
         run: .\BuildScripts\build_server_win64.ps1 -UERoot "$env:UE_ROOT"

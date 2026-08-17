@@ -11,6 +11,12 @@ required=[
  'Source/ArabiaStrikeWorldWar/Public/Combat/ASHealthComponent.h',
  'Source/ArabiaStrikeWorldWar/Public/Combat/ASWeaponComponent.h',
  'BuildScripts/verify_unreal_local.ps1',
+ 'BuildScripts/verify_delivery_tracks.ps1',
+ 'BuildScripts/build_android.ps1',
+ 'BuildScripts/build_ios.ps1',
+ 'ci/preflight_web_delivery.py',
+ 'ci/preflight_native_delivery.py',
+ 'Web/index.html', 'Web/app.css', 'Web/app.js',
  'Config/DefaultEngine.ini', 'Config/DefaultInput.ini'
 ]
 errors=[]
