@@ -50,6 +50,18 @@
     {
       "Name": "OnlineSubsystemUtils",
       "Enabled": true
+    },
+    {
+      "Name": "PCG",
+      "Enabled": true
+    },
+    {
+      "Name": "ChaosVehiclesPlugin",
+      "Enabled": true
+    },
+    {
+      "Name": "Water",
+      "Enabled": true
     }
   ]
 }
