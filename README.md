@@ -38,3 +38,7 @@ python ci/preflight.py
 ```
 
 See `docs/BUILD_AND_RUN.md` for client/server build commands.
+
+
+## Phase 2 — Playable Combat Foundation
+Adds data-driven weapons, replicated ammo/reload/projectiles, interaction, pilotable vehicle scaffold, AI pressure, and replicated Jeddah mission progression. See `docs/PHASE2_PLAYABLE_COMBAT.md`.
