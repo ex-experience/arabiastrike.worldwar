@@ -37,7 +37,7 @@
     },
     {
       "Name": "PixelStreaming2",
-      "Enabled": false
+      "Enabled": true
     },
     {
       "Name": "GameplayAbilities",
