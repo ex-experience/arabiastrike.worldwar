@@ -4,6 +4,7 @@
 #include "ASCharacter.generated.h"
 class UASHealthComponent; class UASWeaponComponent; class UASWeaponInventoryComponent; class USpringArmComponent; class UCameraComponent; class AASGrenade;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FASDownedStateChanged,bool,bDowned);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FASEliminatedStateChanged,bool,bEliminated);
 UCLASS()
 class ARABIASTRIKEWORLDWAR_API AASCharacter : public ACharacter
 {
@@ -17,9 +18,13 @@ public:
     UFUNCTION(BlueprintPure) UASWeaponComponent* GetWeaponComponent()const{return Weapon;}
     UFUNCTION(BlueprintPure) UASWeaponInventoryComponent* GetInventoryComponent()const{return Inventory;}
     UFUNCTION(BlueprintPure) bool IsDowned() const { return bDowned; }
+    UFUNCTION(BlueprintPure) bool IsEliminated() const { return bEliminated; }
+    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category="Respawn") void InitializeForRespawn();
     UPROPERTY(BlueprintAssignable) FASDownedStateChanged OnDownedStateChanged;
+    UPROPERTY(BlueprintAssignable) FASEliminatedStateChanged OnEliminatedStateChanged;
 protected:
     virtual void BeginPlay()override;
+    virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly) TObjectPtr<USpringArmComponent> CameraBoom;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly) TObjectPtr<UCameraComponent> FollowCamera;
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly) TObjectPtr<UASHealthComponent> Health;
@@ -35,7 +40,7 @@ protected:
     UPROPERTY(EditDefaultsOnly,Category="Grenade") TSubclassOf<AASGrenade> GrenadeClass;
     UPROPERTY(EditDefaultsOnly,Category="Grenade") int32 MaxGrenades=3;
     UPROPERTY(ReplicatedUsing=OnRep_Downed,BlueprintReadOnly) bool bDowned=false;
-    UPROPERTY(Replicated,BlueprintReadOnly) bool bEliminated=false;
+    UPROPERTY(ReplicatedUsing=OnRep_Eliminated,BlueprintReadOnly) bool bEliminated=false;
     UPROPERTY(Replicated,BlueprintReadOnly) int32 Grenades=3;
     bool bSprintHeld=false,bFireHeld=false;
     double LastDashTime=-1000.;
@@ -47,6 +52,8 @@ protected:
     UFUNCTION(Server,Reliable) void ServerThrowGrenade(FVector_NetQuantize Origin,FVector_NetQuantizeNormal Direction);
     UFUNCTION() void HandleHealthDeath(AActor* InstigatorActor);
     UFUNCTION() void OnRep_Downed();
+    UFUNCTION() void OnRep_Eliminated();
+    void ApplyLifeState();
     void EnterDownedState();
     void FinalizeBleedout();
     bool TryReviveFrom(APawn* Reviver);

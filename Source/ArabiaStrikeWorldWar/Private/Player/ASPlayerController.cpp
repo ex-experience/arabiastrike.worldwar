@@ -4,7 +4,11 @@
 #include "Game/ASGameMode.h"
 #include "Combat/ASHealthComponent.h"
 #include "Combat/ASWeaponComponent.h"
+#include "Engine/World.h"
+#include "GameFramework/GameStateBase.h"
 #include "Kismet/GameplayStatics.h"
+#include "Net/UnrealNetwork.h"
+
 void AASPlayerController::SendChat(const FString&M,EASChatChannel C){FString Clean=M.Left(180).TrimStartAndEnd();if(!Clean.IsEmpty())ServerSendChat(Clean,C);}
 void AASPlayerController::ServerSendChat_Implementation(const FString&M,EASChatChannel C){FString Clean=M.Left(180).TrimStartAndEnd();if(Clean.IsEmpty())return;if(AASGameMode*GM=GetWorld()?GetWorld()->GetAuthGameMode<AASGameMode>():nullptr)GM->BroadcastChat(this,Clean,C);}
 void AASPlayerController::ClientReceiveChat_Implementation(const FString&S,const FString&M,EASChatChannel C){OnChatReceived.Broadcast(S,M,C);}
@@ -19,3 +23,48 @@ int32 AASPlayerController::GetRescuedHostageCount()const{const AASMissionDirecto
 int32 AASPlayerController::GetRequiredHostageCount()const{const AASMissionDirector*D=AS_FindMissionDirector(this);return D?D->GetRequiredHostages():0;}
 
 EASCityDistrict AASPlayerController::GetCurrentDistrict()const{const AASPlayerState*PS=GetPlayerState<AASPlayerState>();return PS?PS->CurrentDistrict:EASCityDistrict::Corniche;}
+
+float AASPlayerController::GetRespawnTimeRemaining() const
+{
+    if (!RespawnState.bPending)
+    {
+        return 0.f;
+    }
+
+    const UWorld* World = GetWorld();
+    const AGameStateBase* CurrentGameState = World ? World->GetGameState() : nullptr;
+    const double ServerTime = CurrentGameState
+        ? CurrentGameState->GetServerWorldTimeSeconds()
+        : (World ? World->GetTimeSeconds() : 0.0);
+    return static_cast<float>(FMath::Max(0.0, RespawnState.EndServerTime - ServerTime));
+}
+
+void AASPlayerController::SetRespawnState(bool bPending, double EndServerTime)
+{
+    if (!HasAuthority())
+    {
+        return;
+    }
+
+    const bool bChanged = RespawnState.bPending != bPending
+        || !FMath::IsNearlyEqual(RespawnState.EndServerTime, EndServerTime);
+    RespawnState.bPending = bPending;
+    RespawnState.EndServerTime = bPending ? EndServerTime : 0.0;
+
+    if (bChanged)
+    {
+        OnRep_RespawnState();
+        ForceNetUpdate();
+    }
+}
+
+void AASPlayerController::OnRep_RespawnState()
+{
+    OnRespawnStateChanged.Broadcast(RespawnState.bPending, GetRespawnTimeRemaining());
+}
+
+void AASPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    DOREPLIFETIME(AASPlayerController, RespawnState);
+}
