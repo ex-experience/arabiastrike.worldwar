@@ -86,11 +86,11 @@ function setConnectionState(state) {
   ui.root.dataset.serverState = state;
 
   if (state === "online") {
-    ui.statusText.textContent = "GAME SERVER ONLINE";
-    ui.connectionState.textContent = "READY";
-    ui.readinessValue.textContent = "100%";
-    ui.launchHint.textContent = "Secure deployment channel ready";
-    ui.serverMessage.innerHTML = "<span aria-hidden=\"true\">✓</span><div><strong>GAME SERVER ONLINE</strong><p>Pixel Streaming frontend is accepting connections.</p></div>";
+    ui.statusText.textContent = "STREAM ENDPOINT REACHABLE";
+    ui.connectionState.textContent = "REACHABLE";
+    ui.readinessValue.textContent = "LINK";
+    ui.launchHint.textContent = "Endpoint reachable; WebRTC is negotiated when you launch";
+    ui.serverMessage.innerHTML = "<span aria-hidden=\"true\">✓</span><div><strong>STREAM ENDPOINT REACHABLE</strong><p>The frontend responded. A successful gameplay session still requires WebRTC negotiation.</p></div>";
     return;
   }
 
@@ -127,6 +127,8 @@ async function probeStreamingBackend() {
     const timeoutId = window.setTimeout(() => controller.abort(), 5000);
 
     try {
+      // An opaque no-CORS response proves network reachability only.
+      // It must never be treated as proof of Pixel Streaming readiness.
       await fetch(connection.endpoint, {
         method: "HEAD",
         mode: "no-cors",
