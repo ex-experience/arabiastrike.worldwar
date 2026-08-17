@@ -1,0 +1,49 @@
+name: Deploy ARABIA STRIKE web launcher
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - Web/**
+      - .github/workflows/deploy-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate web launcher
+        shell: bash
+        run: |
+          test -f Web/index.html
+          test -f Web/app.css
+          test -f Web/app.js
+          ! grep -RInE '(localhost|127\.0\.0\.1)' Web
+          ! grep -InE '(src|href)="/' Web/index.html
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Web directory
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: Web
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
