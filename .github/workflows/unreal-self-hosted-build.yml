@@ -1,0 +1,46 @@
+name: unreal-5-8-self-hosted-build
+on:
+  workflow_dispatch:
+    inputs:
+      build_server:
+        description: Build dedicated server too
+        type: boolean
+        default: true
+permissions:
+  contents: read
+jobs:
+  build-client:
+    runs-on: [self-hosted, Windows, X64, Unreal-5.8]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Preflight
+        shell: powershell
+        run: |
+          python ci/preflight.py
+          python ci/preflight_phase2.py
+          python ci/preflight_phase3.py
+      - name: Build client
+        shell: powershell
+        run: .\BuildScripts\build_win64.ps1 -UERoot "$env:UE_ROOT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ASWW-Win64-Client
+          path: BuildOutput/Client
+          if-no-files-found: error
+  build-server:
+    if: ${{ inputs.build_server }}
+    runs-on: [self-hosted, Windows, X64, Unreal-5.8]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Build dedicated server
+        shell: powershell
+        run: .\BuildScripts\build_server_win64.ps1 -UERoot "$env:UE_ROOT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ASWW-Win64-DedicatedServer
+          path: BuildOutput/Server
+          if-no-files-found: error

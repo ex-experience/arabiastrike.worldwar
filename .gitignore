@@ -1,29 +1,58 @@
-# Unreal generated
+﻿# Unreal Engine generated
 Binaries/
 DerivedDataCache/
 Intermediate/
 Saved/
+StagedBuilds/
+
+# Visual Studio / VS Code / IDE local state
 .vs/
 .vscode/
 .idea/
-*.VC.db
 *.sln
 *.suo
+*.user
 *.opensdf
 *.sdf
-*.log
+*.VC.db
+*.VC.opendb
+*.code-workspace
 
-# Build outputs
-BuildOutput/
-Artifacts/
-StagedBuilds/
+# Python generated
+__pycache__/
+*.py[cod]
+*$py.class
 
 # OS
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Secrets / credentials
+# Logs / temp
+*.log
+*.tmp
+*.temp
+*.bak
+
+# Local credentials / secrets
 .env
 .env.*
-Config/DefaultEOSSecrets.ini
+!.env.example
+Config/EOS.ini
+Config/*Secret*.ini
 Config/*Secrets*.ini
+Config/Local*.ini
+
+# Packaging/build output
+BuildOutput/
+Packaged/
+Packaging/
+
+# Keep Unreal project/source/config/content
+!Content/
+!Config/
+!Source/
+!BuildScripts/
+!ci/
+!docs/
+!.github/

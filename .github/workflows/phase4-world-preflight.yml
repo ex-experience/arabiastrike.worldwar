@@ -1,0 +1,17 @@
+name: phase4-world-preflight
+on:
+  push:
+  pull_request:
+jobs:
+  phase4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python ci/preflight.py
+      - run: python ci/preflight_phase2.py
+      - run: python ci/preflight_phase3.py
+      - run: python ci/preflight_phase4.py
+      - run: python ci/static_cpp_sanity.py

@@ -1,0 +1,23 @@
+name: repository-preflight
+on:
+  push:
+    branches: [main, develop, 'feature/**']
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Core repository gate
+        run: python ci/preflight.py
+      - name: Phase 2 combat gate
+        run: python ci/preflight_phase2.py
+      - name: Phase 3 tactical warfare gate
+        run: python ci/preflight_phase3.py
