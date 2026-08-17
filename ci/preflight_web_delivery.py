@@ -65,7 +65,9 @@ def main() -> int:
     require("gamepadconnected" in javascript and "navigator.getGamepads" in javascript, "gamepad readiness is detected", failures)
     require("any-pointer: coarse" in javascript and "maxTouchPoints" in javascript, "touch readiness is detected", failures)
     require("any-pointer: fine" in javascript and "KB/MOUSE" in javascript, "keyboard/mouse readiness is represented", failures)
-    require("GAME SERVER ONLINE" in javascript and "GAME SERVER OFFLINE" in javascript, "online and offline server states are explicit", failures)
+    require("STREAM ENDPOINT REACHABLE" in javascript and "GAME SERVER OFFLINE" in javascript, "reachability and offline states are explicit", failures)
+    require('ui.readinessValue.textContent = "LINK"' in javascript and 'ui.readinessValue.textContent = "100%"' not in javascript, "endpoint reachability never claims 100 percent readiness", failures)
+    require("An opaque no-CORS response proves network reachability only." in javascript and "It must never be treated as proof of Pixel Streaming readiness." in javascript, "reachability probe limitation is documented", failures)
     require("PLAY NOW" in html and "launchGame" in javascript, "PLAY NOW action is wired", failures)
 
     config_definitions = re.findall(r"^const\s+PIXEL_STREAMING_URL\s*=", javascript, re.MULTILINE)
