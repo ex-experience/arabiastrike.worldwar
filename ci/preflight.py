@@ -10,6 +10,7 @@ required=[
  'Source/ArabiaStrikeWorldWar/Private/Player/ASCharacter.cpp',
  'Source/ArabiaStrikeWorldWar/Public/Combat/ASHealthComponent.h',
  'Source/ArabiaStrikeWorldWar/Public/Combat/ASWeaponComponent.h',
+ 'BuildScripts/verify_unreal_local.ps1',
  'Config/DefaultEngine.ini', 'Config/DefaultInput.ini'
 ]
 errors=[]
@@ -21,6 +22,18 @@ try:
     mods={m.get('Name') for m in data.get('Modules',[])}
     if 'ArabiaStrikeWorldWar' not in mods: errors.append('runtime module missing')
 except Exception as e: errors.append(f'uproject invalid: {e}')
+
+verifier_path=ROOT/'BuildScripts/verify_unreal_local.ps1'
+if verifier_path.exists():
+    verifier=verifier_path.read_text(encoding='utf-8',errors='ignore')
+    verifier_markers=[
+        'ci/preflight.py', 'ci/preflight_phase2.py', 'ci/preflight_phase3.py',
+        'ci/preflight_phase4.py', 'ci/preflight_phase5.py', 'ci/static_cpp_sanity.py',
+        'ArabiaStrikeWorldWarEditor', 'ArabiaStrikeWorldWar', 'ArabiaStrikeWorldWarServer',
+        'UnrealEditor.exe', 'Build.bat', 'RunUAT.bat', 'UnrealBuildTool'
+    ]
+    for marker in verifier_markers:
+        if marker not in verifier: errors.append(f'local Unreal verifier marker missing: {marker}')
 
 secret_patterns=[re.compile(r'(?i)(clientsecret|secretkey|privatekey)\s*[=:]\s*[^;\s]+')]
 for p in ROOT.rglob('*'):
