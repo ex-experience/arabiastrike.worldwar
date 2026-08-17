@@ -4,7 +4,9 @@ ARABIA STRIKE uses one Unreal Engine 5.8 project and one `ArabiaStrikeWorldWar` 
 
 ## Track A — Web zero-install
 
-`Web/` is a GitHub Pages launcher. It provides a repository-subpath-safe, responsive entry point, live online/offline presentation, and a single `PIXEL_STREAMING_URL` value that points at the deployed Pixel Streaming frontend. The launcher recognizes touch, keyboard/mouse-capable pointers, and connected gamepads; the Pixel Streaming frontend and Unreal application remain responsible for transporting and consuming gameplay input.
+`Web/` is a GitHub Pages launcher. It provides a repository-subpath-safe, responsive entry point, an explicit `OFFLINE → CHECKING → REACHABLE → NEGOTIATING → CONNECTED` session model with bounded reconnect/failure paths, and a single `PIXEL_STREAMING_URL` value that points at the deployed Pixel Streaming frontend. The launcher recognizes touch, keyboard/mouse-capable pointers, and connected gamepads; the Pixel Streaming frontend and Unreal application remain responsible for transporting and consuming gameplay input.
+
+`REACHABLE` means only that the frontend endpoint responded. A generic iframe load is not a gameplay connection. `CONNECTED` requires an origin-, source-, schema- and session-validated `ASWW_PIXEL_STREAMING_STATE` message from the embedded frontend. See `docs/PIXEL_STREAMING.md` for the bridge contract.
 
 Run the web delivery gate:
 

@@ -150,8 +150,9 @@
     </header>
     <div class="stream-loading" id="stream-loading" role="status" aria-live="polite">
       <span class="stream-spinner" aria-hidden="true"></span>
-      <strong>ESTABLISHING SECURE UPLINK</strong>
-      <small>Negotiating Pixel Streaming session</small>
+      <strong id="stream-loading-title">ESTABLISHING SECURE UPLINK</strong>
+      <small id="stream-loading-detail">Negotiating Pixel Streaming session</small>
+      <button class="retry-button" id="retry-stream" type="button" hidden>RETRY SESSION</button>
     </div>
     <iframe id="stream-frame" title="ARABIA STRIKE: WORLD WAR Pixel Streaming player" allow="autoplay; fullscreen; gamepad; microphone" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </section>
@@ -159,6 +160,7 @@
   <div class="toast" id="offline-toast" role="alert" aria-live="assertive" hidden>
     <span aria-hidden="true">!</span>
     <div><strong>GAME SERVER OFFLINE</strong><small>The deployment channel is not available yet.</small></div>
+    <button class="toast-retry" id="retry-probe" type="button">RETRY</button>
   </div>
 
   <noscript>

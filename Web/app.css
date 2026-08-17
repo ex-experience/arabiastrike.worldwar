@@ -287,26 +287,32 @@ a:focus-visible {
   animation: ping 1.7s ease-out infinite;
 }
 
-html[data-server-state="online"] .status-pulse,
-html[data-server-state="online"] .stream-live-dot {
+html[data-server-state="reachable"] .status-pulse,
+html[data-server-state="connected"] .status-pulse,
+html[data-server-state="connected"] .stream-live-dot {
   color: var(--online);
   background: var(--online);
   box-shadow: 0 0 15px var(--online);
 }
 
-html[data-server-state="online"] #status-text,
-html[data-server-state="online"] #connection-state {
+html[data-server-state="reachable"] #status-text,
+html[data-server-state="reachable"] #connection-state,
+html[data-server-state="connected"] #status-text,
+html[data-server-state="connected"] #connection-state {
   color: var(--online);
 }
 
-html[data-server-state="offline"] .status-pulse {
+html[data-server-state="offline"] .status-pulse,
+html[data-server-state="failed"] .status-pulse {
   color: var(--danger);
   background: var(--danger);
   box-shadow: 0 0 15px rgba(221, 84, 63, 0.72);
 }
 
 html[data-server-state="offline"] #status-text,
-html[data-server-state="offline"] #connection-state {
+html[data-server-state="offline"] #connection-state,
+html[data-server-state="failed"] #status-text,
+html[data-server-state="failed"] #connection-state {
   color: #f17b66;
 }
 
@@ -716,23 +722,29 @@ h1 em {
   line-height: 1.4;
 }
 
-html[data-server-state="offline"] .server-message {
+html[data-server-state="offline"] .server-message,
+html[data-server-state="failed"] .server-message {
   border-color: rgba(221, 84, 63, 0.31);
   background: rgba(221, 84, 63, 0.07);
 }
 
 html[data-server-state="offline"] .server-message > span,
-html[data-server-state="offline"] .server-message strong {
+html[data-server-state="offline"] .server-message strong,
+html[data-server-state="failed"] .server-message > span,
+html[data-server-state="failed"] .server-message strong {
   color: #f17b66;
 }
 
-html[data-server-state="online"] .server-message {
+html[data-server-state="reachable"] .server-message,
+html[data-server-state="connected"] .server-message {
   border-color: rgba(111, 199, 157, 0.28);
   background: rgba(111, 199, 157, 0.06);
 }
 
-html[data-server-state="online"] .server-message > span,
-html[data-server-state="online"] .server-message strong {
+html[data-server-state="reachable"] .server-message > span,
+html[data-server-state="reachable"] .server-message strong,
+html[data-server-state="connected"] .server-message > span,
+html[data-server-state="connected"] .server-message strong {
   color: var(--online);
 }
 
@@ -890,6 +902,24 @@ html[data-server-state="online"] .server-message strong {
   font-size: 10px;
 }
 
+.toast-retry,
+.retry-button {
+  min-width: 88px;
+  min-height: 42px;
+  border: 1px solid rgba(241, 207, 130, 0.48);
+  color: var(--signal-bright);
+  background: rgba(211, 170, 93, 0.08);
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  touch-action: manipulation;
+}
+
+.toast-retry {
+  margin-left: auto;
+}
+
 .stream-experience {
   position: fixed;
   z-index: 900;
@@ -971,6 +1001,12 @@ html[data-server-state="online"] .server-message strong {
   color: var(--dim);
   font-size: 9px;
   letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.retry-button {
+  margin-top: 24px;
+  padding: 0 18px;
 }
 
 .stream-spinner {

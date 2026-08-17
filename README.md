@@ -26,7 +26,7 @@ The repository contains no third-party game assets, copied maps, characters, mus
 - Dedicated server target
 - Online Services Null for local/backend-free testing
 - EOS plugins present but disabled until credentials/product setup exists
-- Pixel Streaming 2 present but disabled until cloud-streaming deployment
+- Pixel Streaming 2 is enabled in the project descriptor, but plugin loading remains unverified until a real UE 5.8 installation is available; no streaming backend is configured
 
 ## Start
 
