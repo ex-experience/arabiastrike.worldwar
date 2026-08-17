@@ -92,9 +92,13 @@ try {
         }
 
         foreach ($Suffix in @(
+            "Program Files\Epic Games\UE_5.8.1",
             "Program Files\Epic Games\UE_5.8",
+            "Epic Games\UE_5.8.1",
             "Epic Games\UE_5.8",
+            "UnrealEngine\UE_5.8.1",
             "UnrealEngine\UE_5.8",
+            "UE_5.8.1",
             "UE_5.8"
         )) {
             Add-UniquePath $EngineCandidates ([IO.Path]::Combine($Drive.Root, $Suffix))
@@ -153,6 +157,10 @@ try {
             (Join-Path $CandidateRoot "Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll"),
             (Join-Path $CandidateRoot "Engine\Binaries\DotNET\UnrealBuildTool.exe")
         )
+        $PixelStreaming2PluginPath = Find-FirstExistingFile @(
+            (Join-Path $CandidateRoot "Engine\Plugins\Media\PixelStreaming2\PixelStreaming2.uplugin"),
+            (Join-Path $CandidateRoot "Engine\Plugins\Media\PixelStreaming\PixelStreaming2.uplugin")
+        )
 
         $Version = "UNKNOWN"
         $IsVersion58 = $false
@@ -171,7 +179,8 @@ try {
         $HasBuildBatch = [IO.File]::Exists($BuildBatchPath)
         $HasRunUAT = [IO.File]::Exists($RunUATPath)
         $HasUBT = -not [string]::IsNullOrWhiteSpace($UnrealBuildToolPath)
-        Write-Output "ENGINE_CANDIDATE=$CandidateRoot;VERSION=$Version;EDITOR=$HasEditor;BUILD_BAT=$HasBuildBatch;RUN_UAT=$HasRunUAT;UBT=$HasUBT"
+        $HasPixelStreaming2 = -not [string]::IsNullOrWhiteSpace($PixelStreaming2PluginPath)
+        Write-Output "ENGINE_CANDIDATE=$CandidateRoot;VERSION=$Version;EDITOR=$HasEditor;BUILD_BAT=$HasBuildBatch;RUN_UAT=$HasRunUAT;UBT=$HasUBT;PIXEL_STREAMING2=$HasPixelStreaming2"
 
         if (-not $SelectedEngine -and $IsVersion58 -and $HasEditor -and $HasBuildBatch -and $HasRunUAT -and $HasUBT) {
             $SelectedEngine = [PSCustomObject]@{
@@ -181,6 +190,7 @@ try {
                 BuildBatch = $BuildBatchPath
                 RunUAT = $RunUATPath
                 UnrealBuildTool = $UnrealBuildToolPath
+                PixelStreaming2Plugin = $PixelStreaming2PluginPath
             }
         }
     }
@@ -228,6 +238,9 @@ try {
         PHASE4 = "ci/preflight_phase4.py"
         PHASE5 = "ci/preflight_phase5.py"
         STATIC_CPP_SANITY = "ci/static_cpp_sanity.py"
+        WEB_DELIVERY = "ci/preflight_web_delivery.py"
+        NATIVE_DELIVERY = "ci/preflight_native_delivery.py"
+        SECURITY = "ci/security_static_audit.py"
     }
     $PreflightResults = [ordered]@{}
 
@@ -262,6 +275,21 @@ try {
             Write-Output "LOG_PREFLIGHT_$PreflightName=$PreflightLog"
         }
     }
+
+    $PowerShellSanityScript = Join-Path $ProjectRoot "ci\powershell_sanity.ps1"
+    $PowerShellSanityLog = Join-Path $VerificationLogRoot "preflight_powershell_sanity.log"
+    Write-Output "COMMAND_PREFLIGHT_POWERSHELL_SANITY=powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$PowerShellSanityScript`""
+    & powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $PowerShellSanityScript 2>&1 | Tee-Object -FilePath $PowerShellSanityLog
+    $PowerShellSanityExitCode = $LASTEXITCODE
+    if ($PowerShellSanityExitCode -eq 0) {
+        $PreflightResults["POWERSHELL_SANITY"] = "PASS"
+    }
+    else {
+        $PreflightResults["POWERSHELL_SANITY"] = "FAIL_EXIT_$PowerShellSanityExitCode"
+        $PreflightSucceeded = $false
+        $VerificationFailed = $true
+    }
+    Write-Output "LOG_PREFLIGHT_POWERSHELL_SANITY=$PowerShellSanityLog"
 
     $BuildTargets = [ordered]@{
         EDITOR = "ArabiaStrikeWorldWarEditor"
@@ -325,6 +353,7 @@ try {
         $BuildBatchResult = $SelectedEngine.BuildBatch
         $RunUATResult = $SelectedEngine.RunUAT
         $UBTPathResult = $SelectedEngine.UnrealBuildTool
+        $PixelStreaming2PluginResult = if ($SelectedEngine.PixelStreaming2Plugin) { $SelectedEngine.PixelStreaming2Plugin } else { "NOT_FOUND" }
     }
     else {
         $EngineVersionResult = "NOT_FOUND"
@@ -333,6 +362,7 @@ try {
         $BuildBatchResult = "NOT_FOUND"
         $RunUATResult = "NOT_FOUND"
         $UBTPathResult = "NOT_FOUND"
+        $PixelStreaming2PluginResult = "NOT_FOUND"
     }
 
     if ($AllBuildsPassed) {
@@ -356,6 +386,7 @@ try {
         "BUILD_BAT=$BuildBatchResult",
         "RUN_UAT=$RunUATResult",
         "UNREAL_BUILD_TOOL=$UBTPathResult",
+        "PIXEL_STREAMING2_PLUGIN=$PixelStreaming2PluginResult",
         "PREFLIGHT_RESULTS=$PreflightSummary",
         "UBT_RESULT=$UBTResult",
         "UHT_RESULT=$UHTResult",

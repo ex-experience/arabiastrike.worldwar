@@ -10,7 +10,8 @@ param(
     [ValidateRange(360, 4320)]
     [int]$ResolutionY = 1080,
     [switch]$VisibleWindow,
-    [switch]$WaitForExit
+    [switch]$WaitForExit,
+    [switch]$SkipSignallingProbe
 )
 
 Set-StrictMode -Version Latest
@@ -114,6 +115,11 @@ try {
     if ($ParsedSignallingUrl.Scheme -notin @("ws", "wss")) {
         throw "The signalling URL must use ws:// or wss://."
     }
+    if (-not [string]::IsNullOrWhiteSpace($ParsedSignallingUrl.UserInfo) -or
+        -not [string]::IsNullOrWhiteSpace($ParsedSignallingUrl.Query) -or
+        -not [string]::IsNullOrWhiteSpace($ParsedSignallingUrl.Fragment)) {
+        throw "Do not put credentials, tokens, query strings or fragments in the signalling URL."
+    }
 
     $EndpointBuilder = [UriBuilder]::new($ParsedSignallingUrl)
     $EndpointBuilder.Port = $SignallingServerPort
@@ -123,6 +129,27 @@ try {
 catch {
     Write-Output "SIGNALLING_ENDPOINT=INVALID"
     $FailureReasons.Add("Invalid signalling endpoint: $($_.Exception.Message)")
+}
+
+if ($SignallingEndpoint -and -not $SkipSignallingProbe) {
+    $TcpClient = [Net.Sockets.TcpClient]::new()
+    try {
+        $ConnectTask = $TcpClient.ConnectAsync($ParsedSignallingUrl.Host, $SignallingServerPort)
+        if (-not $ConnectTask.Wait(3000) -or -not $TcpClient.Connected) {
+            throw "TCP connection timed out."
+        }
+        Write-Output "SIGNALLING_REACHABILITY=TCP_REACHABLE_NOT_WEBRTC_VERIFIED"
+    }
+    catch {
+        Write-Output "SIGNALLING_REACHABILITY=NOT_REACHABLE"
+        $FailureReasons.Add("The signalling TCP endpoint is not reachable at $($ParsedSignallingUrl.Host):$SignallingServerPort. Start the real signalling service first.")
+    }
+    finally {
+        $TcpClient.Dispose()
+    }
+}
+elseif ($SignallingEndpoint) {
+    Write-Output "SIGNALLING_REACHABILITY=NOT_CHECKED_BY_REQUEST"
 }
 
 if ($FailureReasons.Count -gt 0) {

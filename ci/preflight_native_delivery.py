@@ -35,11 +35,13 @@ def main() -> int:
         "ANDROID": ROOT / "BuildScripts" / "build_android.ps1",
         "IOS": ROOT / "BuildScripts" / "build_ios.ps1",
         "UNREAL_VERIFY": ROOT / "BuildScripts" / "verify_unreal_local.ps1",
+        "UE_RESUME": ROOT / "BuildScripts" / "resume_after_ue58.ps1",
+        "MULTIPLAYER_HARNESS": ROOT / "BuildScripts" / "run_local_multiplayer.ps1",
         "TRACK_VERIFY": ROOT / "BuildScripts" / "verify_delivery_tracks.ps1",
     }
     for name, script_path in required_scripts.items():
         require(script_path.is_file(), f"{name} build/readiness script exists", failures)
-        if script_path.is_file() and name not in {"UNREAL_VERIFY", "TRACK_VERIFY"}:
+        if script_path.is_file() and name not in {"UNREAL_VERIFY", "UE_RESUME", "MULTIPLAYER_HARNESS", "TRACK_VERIFY"}:
             script = script_path.read_text(encoding="utf-8")
             require("ArabiaStrikeWorldWar.uproject" in script, f"{name} targets the shared project", failures)
 
@@ -49,9 +51,13 @@ def main() -> int:
 
     maps = sorted((ROOT / "Content").rglob("*.umap"))
     assets = sorted((ROOT / "Content").rglob("*.uasset"))
-    jeddah_map = ROOT / "Content" / "World" / "Jeddah" / "Maps" / "Jeddah_Prototype.umap"
+    jeddah_map = ROOT / "Content" / "Maps" / "Jeddah_RedSea_Assault.umap"
     engine_config = (ROOT / "Config" / "DefaultEngine.ini").read_text(encoding="utf-8")
-    map_defaults_ready = "/Game/World/Jeddah/Maps/Jeddah_Prototype" in engine_config
+    map_package = "/Game/Maps/Jeddah_RedSea_Assault"
+    map_defaults_ready = (
+        f"GameDefaultMap={map_package}" in engine_config
+        and f"ServerDefaultMap={map_package}" in engine_config
+    )
 
     print(f"UMAP_COUNT={len(maps)}")
     print(f"UASSET_COUNT={len(assets)}")
@@ -61,7 +67,7 @@ def main() -> int:
     print("NATIVE_RUNTIME_EVIDENCE=NOT_PRODUCED_BY_STATIC_PREFLIGHT")
 
     if not jeddah_map.is_file():
-        print("BLOCKER: A real Content/World/Jeddah/Maps/Jeddah_Prototype.umap has not been created by Unreal Editor.")
+        print("BLOCKER: A real Content/Maps/Jeddah_RedSea_Assault.umap has not been created by Unreal Editor.")
     if not map_defaults_ready:
         print("BLOCKER: GameDefaultMap and ServerDefaultMap remain unchanged until the real Jeddah map loads successfully.")
 
