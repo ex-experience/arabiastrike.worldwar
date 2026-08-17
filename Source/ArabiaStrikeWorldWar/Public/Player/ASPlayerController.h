@@ -23,4 +23,5 @@ public:
     UFUNCTION(BlueprintPure,Category="HUD") EASMissionPhase GetMissionPhase() const;
     UFUNCTION(BlueprintPure,Category="HUD") int32 GetRescuedHostageCount() const;
     UFUNCTION(BlueprintPure,Category="HUD") int32 GetRequiredHostageCount() const;
+    UFUNCTION(BlueprintPure,Category="HUD") EASCityDistrict GetCurrentDistrict() const;
 };

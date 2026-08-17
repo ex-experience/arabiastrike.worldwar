@@ -4,7 +4,7 @@
 #include "ASGameState.generated.h"
 
 UENUM(BlueprintType)
-enum class EASWorldEvent : uint8 { Calm, ConvoyAmbush, HeliAttack, MechAssault };
+enum class EASWorldEvent : uint8 { Calm, ConvoyAmbush, HeliAttack, MechAssault, SecuritySweep, PortLockdown, SandstormEmergency, CivilianEvacuation, BoatInterdiction };
 
 UCLASS()
 class ARABIASTRIKEWORLDWAR_API AASGameState : public AGameStateBase

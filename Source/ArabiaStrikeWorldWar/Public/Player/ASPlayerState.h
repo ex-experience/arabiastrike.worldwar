@@ -1,6 +1,7 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
+#include "World/ASWorldTypes.h"
 #include "ASPlayerState.generated.h"
 
 UCLASS()
@@ -15,4 +16,6 @@ public:
     UPROPERTY(Replicated, BlueprintReadOnly) int32 Kills = 0;
     UPROPERTY(Replicated, BlueprintReadOnly) int32 Deaths = 0;
     UPROPERTY(Replicated, BlueprintReadOnly) int32 XP = 0;
+    UPROPERTY(Replicated, BlueprintReadOnly, Category="World") EASCityDistrict CurrentDistrict = EASCityDistrict::Corniche;
+    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, Category="World") void SetCurrentDistrict(EASCityDistrict NewDistrict) { CurrentDistrict = NewDistrict; ForceNetUpdate(); }
 };
