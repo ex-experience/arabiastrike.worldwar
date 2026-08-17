@@ -1,0 +1,43 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "Games",
+  "Description": "ARABIA STRIKE: WORLD WAR - AAA-style online open-world action foundation",
+  "Modules": [
+    {
+      "Name": "ArabiaStrikeWorldWar",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "EnhancedInput",
+      "Enabled": true
+    },
+    {
+      "Name": "Niagara",
+      "Enabled": true
+    },
+    {
+      "Name": "OnlineServices",
+      "Enabled": true
+    },
+    {
+      "Name": "OnlineServicesNull",
+      "Enabled": true
+    },
+    {
+      "Name": "OnlineServicesEOS",
+      "Enabled": false
+    },
+    {
+      "Name": "OnlineServicesEOSGS",
+      "Enabled": false
+    },
+    {
+      "Name": "PixelStreaming2",
+      "Enabled": false
+    }
+  ]
+}
