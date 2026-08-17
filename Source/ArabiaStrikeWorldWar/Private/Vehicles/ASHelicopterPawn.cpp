@@ -1,0 +1,9 @@
+#include "Vehicles/ASHelicopterPawn.h"
+#include "Vehicles/ASVehicleTurretComponent.h"
+#include "Combat/ASHealthComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
+#include "Kismet/GameplayStatics.h"
+AASHelicopterPawn::AASHelicopterPawn(){PrimaryActorTick.bCanEverTick=true;bReplicates=true;SetReplicateMovement(true);Body=CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Body"));RootComponent=Body;FlightMovement=CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FlightMovement"));FlightMovement->MaxSpeed=2600.f;Health=CreateDefaultSubobject<UASHealthComponent>(TEXT("Health"));NoseGun=CreateDefaultSubobject<UASVehicleTurretComponent>(TEXT("NoseGun"));}
+void AASHelicopterPawn::AcquireTarget(){Target=nullptr;float Best=AcquireRadius;TArray<AActor*>Players;UGameplayStatics::GetAllActorsOfClass(this,APawn::StaticClass(),Players);for(AActor*A:Players){APawn*P=Cast<APawn>(A);if(!P||!P->IsPlayerControlled())continue;const float D=FVector::Dist(P->GetActorLocation(),GetActorLocation());if(D<Best){Best=D;Target=P;}}}
+void AASHelicopterPawn::Tick(float D){Super::Tick(D);if(!HasAuthority()||!GetWorld()||Health->IsDead())return;const double Now=GetWorld()->GetTimeSeconds();if(!Target.IsValid()||Now>=NextAcquire){NextAcquire=Now+1.0;AcquireTarget();}if(!Target.IsValid())return;const FVector Center=Target->GetActorLocation()+FVector(0,0,OrbitAltitude);const FVector ToCenter=Center-GetActorLocation();const FVector Tangent=FVector::CrossProduct(FVector::UpVector,ToCenter.GetSafeNormal2D());const FVector Desired=(ToCenter.GetSafeNormal()*0.55f+Tangent*0.85f).GetSafeNormal();AddMovementInput(Desired,1.f);SetActorRotation((Target->GetActorLocation()-GetActorLocation()).Rotation());if(NoseGun&&Now>=NextFire&&FVector::Dist(GetActorLocation(),Center)<OrbitRadius*1.8f){NextFire=Now+FireInterval;NoseGun->RequestAim((Target->GetActorLocation()-GetActorLocation()).Rotation());NoseGun->RequestFire();}}

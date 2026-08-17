@@ -1,4 +1,5 @@
-# ARABIA STRIKE: WORLD WAR
+# ARABIA STRIKE: WORLD WAR — UE5.8 Phase 3 Tactical Warfare
+
 
 Unreal Engine 5.8 C++ production starter for a server-authoritative, 360-degree online action game.
 
@@ -42,3 +43,7 @@ See `docs/BUILD_AND_RUN.md` for client/server build commands.
 
 ## Phase 2 — Playable Combat Foundation
 Adds data-driven weapons, replicated ammo/reload/projectiles, interaction, pilotable vehicle scaffold, AI pressure, and replicated Jeddah mission progression. See `docs/PHASE2_PLAYABLE_COMBAT.md`.
+
+
+## Phase 3 additions
+See `docs/PHASE3_TACTICAL_WARFARE.md`. The repository now includes authoritative interaction, co-op downed/revive, loadout switching, grenades, suppression/flanking AI, Hummer turret combat, helicopter pressure, boss weak points and HUD query hooks.
