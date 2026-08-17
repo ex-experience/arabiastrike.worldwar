@@ -111,6 +111,15 @@ def main() -> int:
     require(re.search(r"(?m)^\s+path:\s*Web\s*$", workflow) is not None, "Pages artifact publishes only Web", failures)
     require("python ci/preflight_web_delivery.py" in workflow, "Pages deployment requires this web gate", failures)
 
+    development_workflow_path = ROOT / ".github" / "workflows" / "web-preflight.yml"
+    require(development_workflow_path.is_file(), "non-deploying Web development workflow exists", failures)
+    if development_workflow_path.is_file():
+        development_workflow = development_workflow_path.read_text(encoding="utf-8")
+        require('"codex/**"' in development_workflow, "development workflow covers codex branches", failures)
+        require("python ci/preflight_web_delivery.py" in development_workflow, "development workflow enforces the strict Web gate", failures)
+        require("verify_web_local.ps1" in development_workflow, "development workflow runs the repository-subpath HTTP smoke test", failures)
+        require("actions/deploy-pages" not in development_workflow and "pages: write" not in development_workflow, "development workflow has no Pages deployment capability", failures)
+
     result = "PASS" if not failures else "FAIL"
     print(f"WEB_DELIVERY_RESULT={result}")
     print(f"WEB_ASSET_REFERENCES={','.join(local_references)}")

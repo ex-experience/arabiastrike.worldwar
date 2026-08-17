@@ -1,0 +1,45 @@
+name: Web development preflight
+
+on:
+  push:
+    branches:
+      - "codex/**"
+    paths:
+      - Web/**
+      - ci/preflight_web_delivery.py
+      - BuildScripts/verify_web_local.ps1
+      - .github/workflows/web-preflight.yml
+  pull_request:
+    paths:
+      - Web/**
+      - ci/preflight_web_delivery.py
+      - BuildScripts/verify_web_local.ps1
+      - .github/workflows/web-preflight.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-preflight-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-web:
+    name: Validate launcher without deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Run strict Web gate and asset budget
+        run: python ci/preflight_web_delivery.py
+
+      - name: Run repository-subpath HTTP smoke test
+        shell: pwsh
+        run: ./BuildScripts/verify_web_local.ps1 -PythonExecutable (Get-Command python).Source
