@@ -1,0 +1,29 @@
+# Unreal generated
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.vscode/
+.idea/
+*.VC.db
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.log
+
+# Build outputs
+BuildOutput/
+Artifacts/
+StagedBuilds/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets / credentials
+.env
+.env.*
+Config/DefaultEOSSecrets.ini
+Config/*Secrets*.ini
