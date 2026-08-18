@@ -13,8 +13,8 @@ No EOS product configuration or credentials are stored in the repository. Do not
 | Server discovery | Authenticated allocation and healthy dedicated-server registration | BLOCKED |
 | Matchmaking | Queue policy, party constraints, cancellation, timeout and regional placement | BLOCKED |
 | Reconnect | Expiring reconnect grants, authoritative state restoration and duplicate-session rejection | NOT_TESTED |
-| Rate limiting | Per-account/IP/service budgets and abuse response | NOT_IMPLEMENTED |
-| Chat spam protection | Server-side message rate/size limits and flood escalation | NOT_VERIFIED |
+| Rate limiting | Per-account/IP/service budgets and abuse response | PARTIAL — per-controller server chat cooldown/burst limiter implemented; account/IP/service limits remain pending |
+| Chat spam protection | Server-side message rate/size limits and flood escalation | IMPLEMENTED_NOT_RUNTIME_VERIFIED — length, whitespace, channel, cooldown and bounded-burst policy is enforced before broadcast; multiplayer evidence pending |
 | Mute and block | Persistent user controls enforced across text/voice surfaces | NOT_IMPLEMENTED |
 | Reports and moderation | Evidence-safe report flow, case status and operator audit log | NOT_IMPLEMENTED |
 | Profanity/abuse controls | Language-aware policy, appeals and false-positive review | NOT_IMPLEMENTED |
