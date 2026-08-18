@@ -19,3 +19,5 @@ sessionId: value from the aswwLauncherSession query parameter
 The message must come from the iframe window and the configured frontend origin. Supported lifecycle states are `negotiating`, `connected`, `disconnected`, `reconnecting` and `failed`. The frontend integration must echo the per-launch session identifier so messages from replaced sessions are rejected.
 
 Security gates include authentication, strict allowed origins, short-lived session authorization, session lifecycle, GPU isolation, rate limits and cost controls. Never put credentials or bearer tokens in `Web/app.js` or the repository.
+
+For local UE5.8 infrastructure, use `BuildScripts/prepare_pixel_streaming2_stack.ps1`. It pins Epic's official `UE5.8` infrastructure branch, keeps downloaded dependencies under the ignored `LocalInfrastructure/` directory, and will not report a WebRTC session from HTTP/TCP reachability alone. The engine-bundled fetch helper must not be run with its default selection when it does not contain a UE5.8 mapping.

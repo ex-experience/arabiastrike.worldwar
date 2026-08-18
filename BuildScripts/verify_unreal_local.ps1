@@ -16,6 +16,10 @@ New-Item -ItemType Directory -Force -Path $VerificationLogRoot | Out-Null
 $VerificationFailed = $false
 $PreflightSucceeded = $true
 $BranchSucceeded = $true
+$HostPrerequisiteSucceeded = $true
+$HostPrerequisiteResult = "NOT_RUN_NO_VALID_UE58"
+$HostPrerequisiteLog = "NOT_CREATED"
+$UHTInvocationConfirmed = $false
 
 function Add-UniquePath {
     param(
@@ -291,6 +295,34 @@ try {
     }
     Write-Output "LOG_PREFLIGHT_POWERSHELL_SANITY=$PowerShellSanityLog"
 
+    if ($SelectedEngine) {
+        $HostCheckScript = Join-Path $ProjectRoot "BuildScripts\check_ue58_host.ps1"
+        $HostCheckLogRoot = Join-Path $ProjectRoot "Saved\Verification\Host"
+        New-Item -ItemType Directory -Force -Path $HostCheckLogRoot | Out-Null
+        $HostPrerequisiteLog = Join-Path $HostCheckLogRoot ("host_{0}.log" -f (Get-Date -Format "yyyyMMdd_HHmmss"))
+        if (-not [IO.File]::Exists($HostCheckScript)) {
+            Write-Output "HOST_PREREQUISITE_ERROR=Missing $HostCheckScript"
+            $HostPrerequisiteResult = "FAIL_CHECK_SCRIPT_MISSING"
+            $HostPrerequisiteSucceeded = $false
+            $VerificationFailed = $true
+        }
+        else {
+            Write-Output "COMMAND_HOST_PREREQUISITE=powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$HostCheckScript`" -UERoot `"$($SelectedEngine.Root)`""
+            & powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $HostCheckScript -UERoot $SelectedEngine.Root 2>&1 |
+                Tee-Object -FilePath $HostPrerequisiteLog
+            $HostCheckExitCode = $LASTEXITCODE
+            if ($HostCheckExitCode -eq 0) {
+                $HostPrerequisiteResult = "PASS"
+            }
+            else {
+                $HostPrerequisiteResult = "BLOCKED"
+                $HostPrerequisiteSucceeded = $false
+                $VerificationFailed = $true
+            }
+        }
+        Write-Output "HOST_PREREQUISITE_LOG=$HostPrerequisiteLog"
+    }
+
     $BuildTargets = [ordered]@{
         EDITOR = "ArabiaStrikeWorldWarEditor"
         CLIENT = "ArabiaStrikeWorldWar"
@@ -316,6 +348,12 @@ try {
         }
         $VerificationFailed = $true
     }
+    elseif (-not $HostPrerequisiteSucceeded) {
+        foreach ($BuildName in $BuildTargets.Keys) {
+            $BuildResults[$BuildName] = "NOT_RUN_NO_WIN64_TOOLCHAIN"
+        }
+        $VerificationFailed = $true
+    }
     else {
         foreach ($BuildName in $BuildTargets.Keys) {
             $TargetName = $BuildTargets[$BuildName]
@@ -328,6 +366,11 @@ try {
                 "-WaitMutex",
                 "-NoHotReloadFromIDE"
             )
+            if ($BuildName -eq "EDITOR") {
+                # Force and expose a real UHT pass so an up-to-date UBT result cannot be
+                # misreported as fresh header-tool evidence.
+                $BuildArguments += @("-ForceHeaderGeneration", "-Verbose")
+            }
             Write-Output "COMMAND_BUILD_$BuildName=`"$($SelectedEngine.BuildBatch)`" $($BuildArguments -join ' ')"
 
             & $SelectedEngine.BuildBatch @BuildArguments 2>&1 | Tee-Object -FilePath $BuildLog
@@ -339,12 +382,22 @@ try {
                 $BuildResults[$BuildName] = "FAIL_EXIT_$BuildExitCode"
                 $VerificationFailed = $true
             }
+            if ($BuildName -eq "EDITOR" -and [IO.File]::Exists($BuildLog)) {
+                $BuildLogText = Get-Content -Raw -LiteralPath $BuildLog
+                $UHTInvocationConfirmed =
+                    $BuildLogText -match "Parsing headers for ArabiaStrikeWorldWarEditor" -and
+                    $BuildLogText -match "Running Internal UnrealHeaderTool"
+                Write-Output "UHT_INVOCATION_EVIDENCE=$(if ($UHTInvocationConfirmed) { 'FOUND_IN_EDITOR_BUILD_LOG' } else { 'NOT_FOUND_IN_EDITOR_BUILD_LOG' })"
+            }
             Write-Output "LOG_BUILD_$BuildName=$BuildLog"
         }
     }
 
     $PreflightSummary = ($PreflightResults.Keys | ForEach-Object { "$_=$($PreflightResults[$_])" }) -join ","
     $AllBuildsPassed = $BuildResults.Count -eq $BuildTargets.Count -and -not ($BuildResults.Values | Where-Object { $_ -ne "PASS" })
+    if ($AllBuildsPassed -and -not $UHTInvocationConfirmed) {
+        $VerificationFailed = $true
+    }
 
     if ($SelectedEngine) {
         $EngineVersionResult = $SelectedEngine.Version
@@ -367,11 +420,15 @@ try {
 
     if ($AllBuildsPassed) {
         $UBTResult = "PASS_ALL_TARGETS"
-        $UHTResult = "PASS_VIA_UBT"
+        $UHTResult = if ($UHTInvocationConfirmed) { "PASS_REAL_INVOCATION" } else { "FAIL_MISSING_REAL_INVOCATION_EVIDENCE" }
     }
     elseif (-not $SelectedEngine) {
         $UBTResult = "NOT_RUN_NO_VALID_UE58"
         $UHTResult = "NOT_RUN_NO_VALID_UE58"
+    }
+    elseif (-not $HostPrerequisiteSucceeded) {
+        $UBTResult = "BLOCKED_WIN64_SDK_VALIDATION"
+        $UHTResult = "NOT_RUN_NO_WIN64_TOOLCHAIN"
     }
     else {
         $UBTResult = "FAIL_OR_NOT_RUN_SEE_TARGET_RESULTS"
@@ -387,6 +444,8 @@ try {
         "RUN_UAT=$RunUATResult",
         "UNREAL_BUILD_TOOL=$UBTPathResult",
         "PIXEL_STREAMING2_PLUGIN=$PixelStreaming2PluginResult",
+        "HOST_PREREQUISITE_RESULT=$HostPrerequisiteResult",
+        "HOST_PREREQUISITE_LOG=$HostPrerequisiteLog",
         "PREFLIGHT_RESULTS=$PreflightSummary",
         "UBT_RESULT=$UBTResult",
         "UHT_RESULT=$UHTResult",

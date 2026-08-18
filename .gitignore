@@ -47,6 +47,7 @@ Config/Local*.ini
 BuildOutput/
 Packaged/
 Packaging/
+LocalInfrastructure/
 
 # Keep Unreal project/source/config/content
 !Content/
