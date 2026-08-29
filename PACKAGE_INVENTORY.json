@@ -1,0 +1,352 @@
+[
+  {
+    "path": "AGENTS.md",
+    "bytes": 1618,
+    "sha256": "0b2d094297e3bdb5f1f2370c68f9bac55e1f57aa372577d1ade1149808b63d0c"
+  },
+  {
+    "path": "Config/Design/ASWW_InputBindings.yaml",
+    "bytes": 647,
+    "sha256": "b69796f654a0d55d1d0761776a8d31268372bf728ca29fb0aa55fe4d5c416859"
+  },
+  {
+    "path": "Config/Design/ASWW_ProductionRules.yaml",
+    "bytes": 1160,
+    "sha256": "6ce694e2ed9479c572cb3243e912e3ae88f1df44cd39d0c0eaaade7c148589b0"
+  },
+  {
+    "path": "Config/Design/ASWW_VisualSystem.yaml",
+    "bytes": 660,
+    "sha256": "0d96e7445755f9ce8c3a7f459443abac75c708c225d52eda93726c7122bc1a77"
+  },
+  {
+    "path": "IMPORT_TO_GITHUB.md",
+    "bytes": 1048,
+    "sha256": "ec34e0377bcb83dc8dfc8e555723bc0b390f2b6a45f6eab25ae9ee00f2c93bec"
+  },
+  {
+    "path": "README_MASTER_PRODUCTION_SYSTEM.md",
+    "bytes": 1070,
+    "sha256": "fe66421ec0bd29387fcc2e7be20500d4ab5fbcd9891c1d63c9b8c5d69a1feea2"
+  },
+  {
+    "path": "Reference/ContactSheets/Batch_01_Investor_Deck_V1_CONTACT_SHEET.jpg",
+    "bytes": 619647,
+    "sha256": "3e6f0fe4ba7e5385d476b8b8863bd28da5c7059ce14433f9769abaeb0479278c"
+  },
+  {
+    "path": "Reference/ContactSheets/Batch_02_Investor_Deck_V2_CONTACT_SHEET.jpg",
+    "bytes": 745179,
+    "sha256": "2e30b815fd1f8498946432f88ae53d101e6a20efd753881d5812e53589d17689"
+  },
+  {
+    "path": "Reference/ContactSheets/Batch_03_Gameplay_Visuals_V3_CONTACT_SHEET.jpg",
+    "bytes": 707421,
+    "sha256": "9e6f2f4b026e812293e82bb0a700efc555e4f160c583c0191d4601c8fe56820b"
+  },
+  {
+    "path": "Reference/ContactSheets/Batch_04_World_Conflict_V4_CONTACT_SHEET.jpg",
+    "bytes": 580501,
+    "sha256": "c6552dc9c8932293bc9e3895666f41a9a449503882de3b14330963afa3fe092e"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_01.jpeg",
+    "bytes": 600116,
+    "sha256": "363f9fefd26db8e78bbc888cacf45093b95137cd5d8103e9f59459b50e6b93ab"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_02.jpeg",
+    "bytes": 534924,
+    "sha256": "b461c132d1715d7f21a972aa204e9890e85df83a2f4faf0ee6f04bc27b517b42"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_03.jpeg",
+    "bytes": 547686,
+    "sha256": "7c11ced0b4892df966b04880c02e49d24927ce362ea81123d66e90d4585343c7"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_04.jpeg",
+    "bytes": 537097,
+    "sha256": "6ed9f1806901fe62f34dccab6572519ab9f0f564223e67883e299148051d1449"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_05.jpeg",
+    "bytes": 689109,
+    "sha256": "5f3e8d414eb333c4876ba4febdbd47a060451e08fef1335e096ee818dd86b36f"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_06.jpeg",
+    "bytes": 494160,
+    "sha256": "82cdb5cb5c69eb3518267b1feff2ce80fb3fce6c9da676595a54d8ccd33ae83c"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_07.jpeg",
+    "bytes": 539670,
+    "sha256": "0a269b0e360502cf0254de804024919f6213727e6188d610e45a7d98d5d1c34a"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_08.jpeg",
+    "bytes": 474013,
+    "sha256": "c6a8c78436f93201c825bc7e00031e283de16c92b9c0c215b7dae9aeaa1b5f82"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_09.jpeg",
+    "bytes": 463661,
+    "sha256": "8e403bb944f40b43d06a30acfb74a199f693cfe4b8945f73d53532a8ee0bd137"
+  },
+  {
+    "path": "Reference/Visuals/Batch_01_Investor_Deck_V1/Batch_01_10.jpeg",
+    "bytes": 576476,
+    "sha256": "80c0e4746ea7d4e0bb2cd0a815cc89458f15c641df0e1dd6512f4dfc77e4fd33"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_01.jpeg",
+    "bytes": 499965,
+    "sha256": "51358410a3048628f43862238d28caaea2e088aa421cea4d763ebe01edc73af9"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_02.jpeg",
+    "bytes": 434154,
+    "sha256": "b423ccf4124c759fb6192e6c30952bfbac865ee8027ac1e1c2130d6bb0f62697"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_03.jpeg",
+    "bytes": 478569,
+    "sha256": "57f2f116b33c659fb0e1cfc447c6adbb864b5e29ff178963243bf13564289bfd"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_04.jpeg",
+    "bytes": 479019,
+    "sha256": "99434c8a1f9ef49a3384f9e30d631681c6b504a31b30437c7069380fadaac2be"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_05.jpeg",
+    "bytes": 563944,
+    "sha256": "b3b7735984008e50ae6cba1eabe24865514ae45c4298ced5cd02af871283c30d"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_06.jpeg",
+    "bytes": 497774,
+    "sha256": "56c9aceecbd1dfb2198de5164fcec57d63008488ca1607c68db226f4b553f3cc"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_07.jpeg",
+    "bytes": 469597,
+    "sha256": "ad1dee99859cc5c923a7cbe6543622313dcae26161f6f35350b3a6e5c56f9748"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_08.jpeg",
+    "bytes": 410224,
+    "sha256": "db5c66838cf020ad2ba9b12c777ef74bb20437040902e8cbb3084677e0cd97dd"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_09.jpeg",
+    "bytes": 488925,
+    "sha256": "250b1bdddbdb7d3d73f0ea501d87a539ec2df98cb78d127a0cb02a5198083c15"
+  },
+  {
+    "path": "Reference/Visuals/Batch_02_Investor_Deck_V2/Batch_02_10.jpeg",
+    "bytes": 498568,
+    "sha256": "922e03e79d6c8eff7305a7c22b64f3bc04f23c5bc3b6a805b5089b6677d919a7"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_01.jpeg",
+    "bytes": 404587,
+    "sha256": "63e22a6b6e3dc20e4a43686e68bacda98379a85e1451e9b9829fea7d914a6712"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_02.jpeg",
+    "bytes": 436247,
+    "sha256": "2cbd2602b4d12b0f41742cf4562673c2265bd6d5aa647c16816a0947163c888d"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_03.jpeg",
+    "bytes": 340479,
+    "sha256": "164faf22499d64ea68f9b414897ae05dad2bcc7727821b0d9eecaa6e620ab909"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_04.jpeg",
+    "bytes": 455043,
+    "sha256": "edbd80744fbc48e4d5ec00e1b4222b1fd8ca00c6704285dc86e1d339aa2b864e"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_05.jpeg",
+    "bytes": 439996,
+    "sha256": "054c6252f0579a6f4fa924447b85edf555ddbc2c3ac9c45dce4ed66a130d0b89"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_06.jpeg",
+    "bytes": 319582,
+    "sha256": "97f6ce3cfe555f1d9d3957ba81ac6e2c846d834540f941639f64415a0528e9ce"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_07.jpeg",
+    "bytes": 471730,
+    "sha256": "7a1b3cc29ca4743a564b072e20d0d5c68f6dadd7d4fc4b7b5cb0bb0a97a5b65b"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_08.jpeg",
+    "bytes": 450057,
+    "sha256": "6514a758b99b870b79675b61263b6a31d5f482dd330809c21d2f3025482db3e3"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_09.jpeg",
+    "bytes": 444923,
+    "sha256": "d38e2f81a99d2f130fa74b41cf9324a51abdc4e194b12c8699a7c96f77383da9"
+  },
+  {
+    "path": "Reference/Visuals/Batch_03_Gameplay_Visuals_V3/Batch_03_10.jpeg",
+    "bytes": 365301,
+    "sha256": "40ae1fa188566f13dfb35f99c27ec4c5bd9344123ee1281f0becc287c3652115"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_01.jpeg",
+    "bytes": 496643,
+    "sha256": "3e64ec8939effc14516721007838314215fc91fab96fe146b41c5745fb617570"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_02.jpeg",
+    "bytes": 364474,
+    "sha256": "2676d1fc18babda1bffa15042f2f26fed43fab7b285c9f5673a0159c461cc521"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_03.jpeg",
+    "bytes": 302610,
+    "sha256": "2c00bf8b86143338594b223aece11d0583a030d4834f473f0155ba538a4ff4ea"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_04.jpeg",
+    "bytes": 421356,
+    "sha256": "9d88138c259f94ae167315d037f10004a1dd7a22df4bd9b743dbf457a9f186c2"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_05.jpeg",
+    "bytes": 366447,
+    "sha256": "cd0d4f2afa4eca5eb3f682ae6b8dcfdcc5a978b8b17da17771cae579e6b92d76"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_06.jpeg",
+    "bytes": 292867,
+    "sha256": "4801c253b9c1a2e5bcd9bca22a93f60df8cbea00df1745b953306b072d5299e9"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_07.jpeg",
+    "bytes": 286014,
+    "sha256": "1e2e51857988093e4f9afa04e8351f2d97797da31abbaa4520aa3a7c0f071cb3"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_08.jpeg",
+    "bytes": 504663,
+    "sha256": "49bfbeb52f4b725f2e3e1c4030546cf7f54c3c58efa436675dd184c2c97ac5d1"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_09.jpeg",
+    "bytes": 328274,
+    "sha256": "af45428a4ae21a789903604cea7bfae76b025a3bc80ace4e0bb1bb8a01a6d43f"
+  },
+  {
+    "path": "Reference/Visuals/Batch_04_World_Conflict_V4/Batch_04_10.jpeg",
+    "bytes": 430017,
+    "sha256": "68900abb900d657e6c7ec39e585dc394e9f147d6c28c83bd8b51cb3de8e14f3c"
+  },
+  {
+    "path": "Reference/Visuals/README.md",
+    "bytes": 5817,
+    "sha256": "a62f1997852591fdbec386694120382439d52d25e52aa96faa1e8cc90db9f559"
+  },
+  {
+    "path": "Reference/Visuals/visual_manifest.csv",
+    "bytes": 12145,
+    "sha256": "87f9c850b25af5e93051151e9c69ceb281c4186b7cee401df61b6f8a4f0667d6"
+  },
+  {
+    "path": "Reference/Visuals/visual_manifest.json",
+    "bytes": 18477,
+    "sha256": "b061c93a78b09851ef6100143a3dc8f093054fcc3d4025047ad3e8ba18d51b12"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/00_MASTER_DIRECTIVE.md",
+    "bytes": 4326,
+    "sha256": "c744a5e4ec238fa2e30f4d6f5652906e3732fb8a61693c7f061ba671079b7dab"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/01_GAME_VISION_IP_PILLARS.md",
+    "bytes": 1799,
+    "sha256": "858db0329cedc79a30f3d4f18806828d5a8846fb665d484f6188a70dce7e2b07"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/02_CHARACTER_BIBLE.md",
+    "bytes": 3920,
+    "sha256": "a3472cf471e75dcfc5cabbdc3ca45d8c9ecf032178c13447ae4fc14c97fff2bc"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/03_ANIMATION_COMBAT_BIBLE.md",
+    "bytes": 2812,
+    "sha256": "80bd5616ca9530e7f068956c8876f2b0ea1ab3d0911b2909a184f6dccc504008"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/04_WEAPONS_EQUIPMENT_BALLISTICS.md",
+    "bytes": 2530,
+    "sha256": "a2ea0c69809d3dd393ca8b7eba33cedddb877c38767d72a42da174e1fffce492"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/05_VEHICLES_OPEN_WORLD_LIVING_CITY.md",
+    "bytes": 2094,
+    "sha256": "c8069c46c722584a577ed6d9b8f2363acc92b38b508ed413684b94d53b2d1519"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/06_WORLD_ENVIRONMENT_JEDDAH_RED_SEA.md",
+    "bytes": 2020,
+    "sha256": "416bdb4551b0ca8517f48ebf3690ee6e1f021d529d5e352a65b2c2d5cc95078b"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/07_CAMPAIGN_MISSIONS_STAGES.md",
+    "bytes": 3335,
+    "sha256": "d5ddb677cfd28be23678d11e1e9a14a0af577b0c87c8856b49215d01391fda81"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/08_NETWORK_HACKING_STRATEGIC_WAR.md",
+    "bytes": 1745,
+    "sha256": "498808eecbaa53054f17930252f9c89ae48cce3a30ac4f985186c6283f068dd2"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/09_UI_UX_MOTION_GRAPHICS.md",
+    "bytes": 2245,
+    "sha256": "a81b11d8d9b3319b96d7e9222a1d2ad806fad961c2af622bca6bc1566e82b864"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/10_CINEMATIC_VFX_AUDIO_LIGHTING.md",
+    "bytes": 2239,
+    "sha256": "389f5f008c8c0d6d2259d390dd8d965cd745e9a9708704dbd963aa3826224a46"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/11_UNREAL_ENGINE_TECH_ARCHITECTURE.md",
+    "bytes": 2400,
+    "sha256": "e0c1d660e02d830046d251710a4cf2ef71290e17b1b12251f024da79de60c92a"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/12_ASSET_PIPELINE_NAMING_BUDGETS.md",
+    "bytes": 2237,
+    "sha256": "3b0a6540fd296a28a5645d0357a79a57a4f61c098a48393ab83c8ab21f760c3b"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/13_INPUT_PC_CONTROLS.md",
+    "bytes": 1800,
+    "sha256": "a1c688d62c16e61542d591c9c4ba4cc723228a66362e786dd902d759cc65801d"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/14_VERTICAL_SLICE_ROADMAP_ACCEPTANCE.md",
+    "bytes": 1972,
+    "sha256": "10d9fcefb614cbe1cb55330566d7e054b2233e1e88b7c72381c0abc267854a9b"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/15_REFERENCE_SOURCES_AND_IP_RULES.md",
+    "bytes": 2131,
+    "sha256": "a43ce7c44b94507438d1711c0cf409b11f27cd214a3f2cfa8d5ef10723b29529"
+  },
+  {
+    "path": "docs/MASTER_PRODUCTION_SYSTEM/IMPLEMENTATION_BACKLOG.md",
+    "bytes": 1997,
+    "sha256": "5306dd643507ebfb1cf2a608cef26afa68e3623f56d67ee951947e9b1545ec28"
+  }
+]

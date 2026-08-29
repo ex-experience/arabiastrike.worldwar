@@ -1,0 +1,43 @@
+version: 1
+project: "ARABIA STRIKE WORLD WAR"
+engine: "Unreal Engine 5.8"
+repository: "ex-experience/arabiastrike.worldwar"
+baseline_branch: "codex/asww-development"
+main_branch_policy: "do_not_modify_until_explicit_acceptance"
+identity:
+  world: "Photoreal Saudi Near-Future Military Open World"
+  realism_ratio: 0.90
+  near_future_ratio: 0.10
+pillars:
+  - Infantry Warfare
+  - Open-World Urban Life
+  - Vehicle Combat
+  - Squad Tactics
+  - Stealth & Infiltration
+  - Naval / Air Operations
+  - Network Warfare / Hacking
+  - Cinematic Strategic Warfare
+content_policy:
+  original_or_licensed_only: true
+  prohibit_ripped_assets: true
+  prohibit_proprietary_source_copy: true
+  prohibit_distinctive_level_copy: true
+hero:
+  canonical_single_master: true
+world:
+  jeddah_authenticity_required: true
+  generic_gulf_city_substitution_forbidden: true
+gameplay_ui:
+  brand_gold_reserved: true
+  neutral: "white/cyan"
+  friendly: "cyan/green"
+  warning: "amber"
+  hostile: "red"
+production_gate:
+  - UE58_editor_compile
+  - UE58_game_compile
+  - real_map_load_save_reopen
+  - PIE_smoke
+  - packaged_Win64_launch
+  - multiplayer_acceptance
+  - performance_acceptance

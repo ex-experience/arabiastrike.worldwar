@@ -1,0 +1,36 @@
+version: 1
+brand_palette:
+  black: "#05070A"
+  burnished_gold: "#B9823B"
+  gunmetal: "#1A2026"
+  off_white: "#E7E3DB"
+gameplay_semantics:
+  neutral: "white/cyan"
+  friendly: "cyan/green"
+  warning: "amber"
+  hostile: "red"
+lighting_looks:
+  - Blue Night
+  - Warm War Sunset
+  - Wet Urban Night
+  - Warm Interior / Old City
+  - Red Emergency
+  - Cool Strategic Command
+world_states:
+  - NORMAL
+  - ALERT
+  - EVACUATION
+  - COMBAT
+  - HEAVY_CONFLICT
+  - RECOVERY
+motion_language:
+  - vector_trace
+  - corner_bracket_draw
+  - grid_reveal
+  - signal_sweep
+  - target_acquire
+  - radar_pulse
+  - hex_expansion
+  - data_stream
+  - map_triangulation
+  - threat_pulse
