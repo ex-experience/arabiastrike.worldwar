@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)][string]$UERoot,
     [ValidateSet("Development", "Shipping")][string]$Configuration = "Development"
@@ -39,6 +39,7 @@ $Arguments = @(
     "-build",
     "-cook",
     "-stage",
+    "-stagingdirectory=D:/ASWW_STAGE",
     "-pak",
     "-package",
     "-archive",

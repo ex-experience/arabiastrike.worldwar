@@ -1,0 +1,715 @@
+ ASWW_AAA_IMPLEMENTATION_SEQUENCE.md                |   72 +
+ ...TEST_RESTORE_UNARMED_KEEP_RIFLE_AND_PACKAGE.ps1 |  201 ++
+ ASWW_ADD_TEMP_PLAYER_CONTROL_TELEMETRY.ps1         |  190 ++
+ ASWW_ADD_TEMP_VISIBLE_PLAYER_PROOF_AND_PACKAGE.ps1 |  164 ++
+ ASWW_AFTER_DESCRIPTOR_PASS_PIPELINE.ps1            |  424 ++++
+ ASWW_ANALYZE_EXISTING_PACKAGED_RUNTIME_LOG.ps1     |   83 +
+ ASWW_AUDIT_COMBAT_DAMAGE_DEATH_RESPAWN_GATE.ps1    |  252 +++
+ ASWW_AUDIT_DUPLICATE_PROTOTYPE_ACTORS.ps1          |  255 +++
+ ASWW_AUDIT_TEMP_QA_MARKERS_BEFORE_CLEANUP.ps1      |  132 ++
+ ...CAPTURE_POSSESSION_STREAMING_CLASSIFICATION.ps1 |   86 +
+ ASWW_CONTINUE_REAL_MANNY_AFTER_SAFE_VERIFY_V4.ps1  |  367 ++++
+ ASWW_CONVERT_JEDDAH_TO_WP_AND_VALIDATE.ps1         |  194 ++
+ ...RED_TEMPLATE_MANNY_INTEGRATE_AND_PACKAGE_V2.ps1 |  549 +++++
+ ASWW_COPY_TP_MANNY_DEPS_INTEGRATE_AND_PACKAGE.ps1  |  557 +++++
+ ASWW_DEEP_COMPARE_DUPLICATES_READONLY.ps1          |  257 +++
+ ASWW_DIAGNOSE_JEDDAH_GENERATION.ps1                |  122 ++
+ ASWW_DIAGNOSE_PACKAGED_POSSESSION_STREAMING.ps1    |  175 ++
+ ASWW_DIAGNOSE_PIE_DISCOVERY.ps1                    |   92 +
+ ASWW_DIAGNOSE_PIE_ENEMY_STREAMING.ps1              |  213 ++
+ ASWW_DIAGNOSE_PIE_EXIT5.ps1                        |  123 ++
+ ASWW_DIAGNOSE_PLAYER_CONTROL_BINDINGS.ps1          |  159 ++
+ ASWW_DIAGNOSE_PLAYER_PRESENTATION_CAMERA.ps1       |  191 ++
+ ASWW_DIAGNOSE_THIRDPERSON_TEMPLATE_SOURCE_V3.ps1   |  215 ++
+ ASWW_DISCOVER_REAL_PLAYER_ASSETS.ps1               |  194 ++
+ ASWW_EXTEND_TEMP_MOVEMENT_TELEMETRY.ps1            |  160 ++
+ ASWW_EXTRACT_JEDDAH_VALIDATION_ERROR.ps1           |   99 +
+ ASWW_EXTRACT_WP_CONVERT_ERROR.ps1                  |   90 +
+ ASWW_FIX_INI_EOF_BLANK_LINES.ps1                   |   75 +
+ ..._FIX_MOVEMENT_TELEMETRY_COMPILE_AND_PACKAGE.ps1 |  108 +
+ ASWW_FIX_PIE_EXITCODE_GUARD_AND_RERUN.ps1          |  148 ++
+ ASWW_FIX_PIE_LOGGING_AND_RERUN.ps1                 |  255 +++
+ ASWW_FIX_PROMOTE_CRLF.ps1                          |   68 +
+ ASWW_FIX_VALIDATOR_LOGGING_AND_CONTINUE.ps1        |  307 +++
+ ...PORT_THIRDPERSON_MANNEQUIN_FROM_FEATUREPACK.ps1 |  382 ++++
+ ...T_THIRDPERSON_MANNEQUIN_FROM_FEATUREPACK_V2.ps1 |  382 ++++
+ ASWW_IMPORT_VERIFY_TP_RIFLE_ABP_AND_PACKAGE.ps1    |  507 +++++
+ ASWW_IMPORT_VERIFY_TP_RIFLE_ABP_AND_PACKAGE_V2.ps1 |  530 +++++
+ ...EGRATE_REAL_RIFLE_STATICMESH_AND_PACKAGE_V3.ps1 |  342 ++++
+ ASWW_INTEGRATE_REAL_RIFLE_VISUAL_AND_PACKAGE.ps1   |  349 ++++
+ ..._INTEGRATE_REAL_RIFLE_VISUAL_AND_PACKAGE_V2.ps1 |  391 ++++
+ ASWW_LAUNCH_MANUAL_PACKAGED_QA.ps1                 |  152 ++
+ ASWW_MANUAL_PACKAGED_QA_CHECKLIST.txt              |  114 ++
+ ASWW_OFFLINE_CONTINUE.ps1                          |  410 ++++
+ ASWW_OFFLINE_FIX_AND_RESUME_PHASE2.ps1             |  184 ++
+ ASWW_OFFLINE_PHASE2_POST_BUILD.ps1                 |  350 ++++
+ ASWW_OFFLINE_PHASE2_POST_BUILD_SAFECRLF.ps1        |  350 ++++
+ ASWW_PACKAGED_RUNTIME_SMOKE_V2_CLEAN_CMDLINE.ps1   |  223 ++
+ ASWW_PACKAGED_RUNTIME_STARTUP_SMOKE.ps1            |  197 ++
+ ASWW_PACKAGE_WIN64_OUTSIDE_ONEDRIVE.ps1            |  200 ++
+ ASWW_PATCH_PIE_WRAPPER_AND_PACKAGE_WIN64.ps1       |  228 +++
+ ASWW_PHASE_01_FIX_CONSTRUCTOR_AND_REPACKAGE.ps1    |  253 +++
+ ASWW_PHASE_01_FIX_V2_DERIVED_CONSTRUCTOR_ONLY.ps1  |  219 ++
+ ASWW_PHASE_01_PLAYER_FOUNDATION_QA.ps1             |  164 ++
+ ASWW_PHASE_01_PLAYER_FOUNDATION_V1.ps1             |  972 +++++++++
+ ...HASE_02A_DISCOVER_SHOOTER_TEMPLATE_CONTRACT.ps1 |  434 ++++
+ ASWW_PHASE_02B_CLOSE_SHOOTER_DEPENDENCIES.ps1      |  262 +++
+ ...SE_02C_IMPORT_ONLY_MISSING_SHOOTER_PACKAGES.ps1 |  471 +++++
+ ...E_02D_RECURSIVE_TEMPLATE_DEPENDENCY_CLOSURE.ps1 |  424 ++++
+ ASWW_PHASE_02E_FIND_QUINN_AND_FINISH_CLOSURE.ps1   |  404 ++++
+ ...F_EXTRACT_QUINN_FROM_UE_ARCHIVES_AND_FINISH.ps1 |  419 ++++
+ ASWW_PHASE_03A_BUILD_COMBAT_PLAYER_V1.ps1          |  416 ++++
+ ASWW_PHASE_03A_CPP_ONLY_COMBAT_RECOVERY_NOUBA.ps1  |  367 ++++
+ ASWW_PHASE_03A_FIX_UHT_HEADER_AND_REPACKAGE.ps1    |  355 ++++
+ ASWW_PHASE_03A_RESUME_REAL_BUILD_V2.ps1            |  275 +++
+ ASWW_PHASE_03B_COMBAT_PLAYER_V1_QA.ps1             |  172 ++
+ ...03C_AB_RESTORE_PROVEN_LOCOMOTION_KEEP_RIFLE.ps1 |  272 +++
+ ASWW_PHASE_03C_CONTROL_RECOVERY_QA.ps1             |  143 ++
+ ASWW_PHASE_03D_JUMP_RELOAD_INPUT_PROOF.ps1         |  267 +++
+ ASWW_PHASE_03D_JUMP_RELOAD_QA.ps1                  |  144 ++
+ ...E_FIX_Z_GROUND_GLITCH_AND_RELOAD_DIAGNOSTIC.ps1 |  471 +++++
+ ...HASE_03E_V2_FIX_Z_RELOAD_EXACT_WEAPON_PATCH.ps1 |  473 +++++
+ ASWW_PHASE_03E_Z_RELOAD_QA.ps1                     |  160 ++
+ ...E_03F_FIX_Z_EXIT_AND_EQUIP_RIFLE_DEFINITION.ps1 |  483 +++++
+ ...E_03F_V2_RESUME_Z_EXIT_AND_RIFLE_DEFINITION.ps1 |  483 +++++
+ ASWW_PHASE_03F_Z_RELOAD_RUNTIME_QA.ps1             |  163 ++
+ ASWW_PHASE_03G_DISABLE_Z_AND_PROVE_FIRE_RELOAD.ps1 |  506 +++++
+ ASWW_PHASE_03G_FIRE_RELOAD_QA.ps1                  |  207 ++
+ ASWW_PINPOINT_COMBAT_RUNTIME_BLOCKERS.ps1          |  457 +++++
+ ASWW_PINPOINT_MANNY_MOUNT_AND_TEMPLATE_SOURCE.ps1  |  303 +++
+ ASWW_PINPOINT_PACKAGED_PLAYER_STARTUP.ps1          |  144 ++
+ ASWW_PINPOINT_STANDARD_MANNEQUIN_SOURCE_V2.ps1     |  294 +++
+ ...NT_WEAPON_DEFAULTS_AND_SELECT_REAL_ASSET_V3.ps1 |  325 +++
+ ASWW_RECOVER_STAGE_LOCK_AND_RERUN_PACKAGE.ps1      |  133 ++
+ ASWW_RECOVER_TACTICAL_RIFLE_DISCOVERY_V2.ps1       |  332 +++
+ ASWW_RECOVER_TACTICAL_RIFLE_DISCOVERY_V3.ps1       |  332 +++
+ ASWW_RECOVER_TACTICAL_RIFLE_DISCOVERY_V4.ps1       |  339 ++++
+ ...EMOVE_TEMP_TELEMETRY_KEEP_MANNY_AND_PACKAGE.ps1 |  313 +++
+ ...VE_TEMP_TELEMETRY_KEEP_MANNY_AND_PACKAGE_V2.ps1 |  328 +++
+ ..._REPAIR_EXACTLY_3_PROTOTYPE_ENEMIES_AND_PIE.ps1 |  359 ++++
+ ASWW_REPAIR_STAGINGDIR_AND_PACKAGE.ps1             |  181 ++
+ ASWW_RESUME_JEDDAH_REPAIR_FORWARD_SLASH.ps1        |  198 ++
+ ASWW_RUN_CLEAN_REAL_MANNY_QA.ps1                   |  119 ++
+ ASWW_RUN_EXACT_PIE_TEST.ps1                        |  125 ++
+ ASWW_RUN_MOVEMENT_TELEMETRY.ps1                    |  137 ++
+ ...RUN_PACKAGED_COMBAT_DAMAGE_DEATH_RESPAWN_QA.ps1 |  146 ++
+ ASWW_RUN_PLAYER_CONTROL_TELEMETRY.ps1              |  148 ++
+ ASWW_RUN_PLAYER_REGRESSION_AB_QA.ps1               |  147 ++
+ ASWW_RUN_REAL_MANNY_PACKAGED_QA.ps1                |  126 ++
+ ASWW_RUN_REAL_RIFLE_COMBAT_QA (1).ps1              |  124 ++
+ ASWW_RUN_REAL_RIFLE_COMBAT_QA.ps1                  |  124 ++
+ ASWW_RUN_TACTICAL_RIFLE_VISUAL_QA.ps1              |  128 ++
+ ASWW_RUN_TP_RIFLE_TACTICAL_VISUAL_QA_V2 (1).ps1    |  129 ++
+ ASWW_RUN_TP_RIFLE_TACTICAL_VISUAL_QA_V2.ps1        |  129 ++
+ ..._TP_RIFLE_TACTICAL_VISUAL_QA_V3_INTERACTIVE.ps1 |  210 ++
+ ASWW_RUN_VISIBLE_PLAYER_PROOF_QA.ps1               |  125 ++
+ ASWW_SAFEARG_VERIFY_MANNY_INTEGRATE_PACKAGE_V3.ps1 |  389 ++++
+ ASWW_SAFE_CLEAN_DUPLICATE_PROTOTYPES_AND_PIE.ps1   |  341 ++++
+ ASWW_SMART_REPAIR_JEDDAH_CONTENT_AND_VALIDATE.ps1  |  491 +++++
+ ASWW_UPGRADE_RIFLE_TACTICAL_STANCE_AND_PACKAGE.ps1 |  501 +++++
+ ASWW_VALIDATE_JEDDAH_WP_CORRECTED.ps1              |  202 ++
+ ASWW_VALIDATE_JEDDAH_WP_DESCRIPTORS.ps1            |  235 +++
+ ...RIFY_AND_IMPORT_TEMPLATE_MANNY_DEPENDENCIES.ps1 |  596 ++++++
+ ..._VERIFY_CONTROLRIG_ACL_RUNTIME_AVAILABILITY.ps1 |  299 +++
+ ASWW_VERIFY_MANNY_ASSETS_AND_COMPATIBILITY.ps1     |  235 +++
+ ASWW_VERIFY_PIE_DISCOVERY_PREREQS.ps1              |  134 ++
+ ASWW_VERIFY_TRUE_THIRDPERSON_RUNTIME_DEPS_V2.ps1   |  336 ++++
+ ...Y_WEAPON_RUNTIME_DEFAULTS_AND_DISCOVER_MESH.ps1 |  393 ++++
+ ...EAPON_RUNTIME_DEFAULTS_AND_DISCOVER_MESH_V2.ps1 |  451 +++++
+ BuildScripts/build_win64.ps1                       |    3 +-
+ BuildScripts/promote_jeddah_default_map.ps1        |    8 +-
+ BuildScripts/run_jeddah_pie_smoke.ps1              |   99 +-
+ BuildScripts/validate_jeddah_map.ps1               |   40 +-
+ Config/DefaultEngine.ini                           |   29 +-
+ Config/DefaultGame.ini                             |    3 +-
+ Config/DefaultInput.ini                            |  122 +-
+ .../Mannequins/Anims/Pistol/Aim/AO_Pistol.uasset   |  Bin 0 -> 129 bytes
+ .../Anims/Pistol/Aim/MF_Pistol_Idle_ADS1.uasset    |  Bin 0 -> 132 bytes
+ .../Pistol/Aim/MF_Pistol_Idle_ADS_AO_CD.uasset     |  Bin 0 -> 131 bytes
+ .../Pistol/Aim/MF_Pistol_Idle_ADS_AO_CU.uasset     |  Bin 0 -> 131 bytes
+ .../Anims/Pistol/MF_Pistol_Idle_ADS.uasset         |  Bin 0 -> 132 bytes
+ .../Mannequins/Anims/Rifle/AIM/AO_Rifle.uasset     |  Bin 0 -> 130 bytes
+ .../Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CC.uasset |  Bin 0 -> 130 bytes
+ .../Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CD.uasset |  Bin 0 -> 130 bytes
+ .../Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CU.uasset |  Bin 0 -> 130 bytes
+ .../Rifle/HitReact/MM_HitReact_Back_Med_01.uasset  |  Bin 0 -> 131 bytes
+ .../Rifle/HitReact/MM_HitReact_Front_Hvy_01.uasset |  Bin 0 -> 131 bytes
+ .../Rifle/HitReact/MM_HitReact_Front_Lgt_01.uasset |  Bin 0 -> 131 bytes
+ .../Rifle/HitReact/MM_HitReact_Front_Lgt_02.uasset |  Bin 0 -> 131 bytes
+ .../Rifle/HitReact/MM_HitReact_Front_Lgt_03.uasset |  Bin 0 -> 131 bytes
+ .../Rifle/HitReact/MM_HitReact_Front_Lgt_04.uasset |  Bin 0 -> 131 bytes
+ .../Rifle/HitReact/MM_HitReact_Front_Med_01.uasset |  Bin 0 -> 131 bytes
+ .../Rifle/HitReact/MM_HitReact_Front_Med_02.uasset |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset        |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset   |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset  |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset        |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset   |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset  |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset       |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset      |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset     |  Bin 0 -> 131 bytes
+ .../Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset      |  Bin 0 -> 131 bytes
+ .../Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset      |  Bin 0 -> 131 bytes
+ .../Jump/MM_Rifle_Jump_RecoveryAdditive.uasset     |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset    |  Bin 0 -> 131 bytes
+ .../Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset     |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/MF_Rifle_Idle_ADS.uasset           |  Bin 0 -> 132 bytes
+ .../Mannequins/Anims/Rifle/MM_Rifle_DryFire.uasset |  Bin 0 -> 131 bytes
+ .../Mannequins/Anims/Rifle/MM_Rifle_Equip.uasset   |  Bin 0 -> 131 bytes
+ .../Mannequins/Anims/Rifle/MM_Rifle_Fire.uasset    |  Bin 0 -> 131 bytes
+ .../Mannequins/Anims/Rifle/MM_Rifle_Reload.uasset  |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset      |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset |  Bin 0 -> 131 bytes
+ .../Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset      |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset      |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset |  Bin 0 -> 131 bytes
+ .../Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset      |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset     |  Bin 0 -> 131 bytes
+ .../Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset    |  Bin 0 -> 131 bytes
+ .../Mannequins/Anims/Unarmed/ABP_Unarmed.uasset    |  Bin 0 -> 131 bytes
+ .../Anims/Unarmed/BS_Idle_Walk_Run.uasset          |  Bin 0 -> 130 bytes
+ .../Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd.uasset    |  Bin 0 -> 131 bytes
+ .../Unarmed/Jog/MF_Unarmed_Jog_Bwd_Left.uasset     |  Bin 0 -> 131 bytes
+ .../Unarmed/Jog/MF_Unarmed_Jog_Bwd_Right.uasset    |  Bin 0 -> 131 bytes
+ .../Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd.uasset    |  Bin 0 -> 131 bytes
+ .../Unarmed/Jog/MF_Unarmed_Jog_Fwd_Left.uasset     |  Bin 0 -> 131 bytes
+ .../Unarmed/Jog/MF_Unarmed_Jog_Fwd_Right.uasset    |  Bin 0 -> 131 bytes
+ .../Anims/Unarmed/Jog/MF_Unarmed_Jog_Left.uasset   |  Bin 0 -> 131 bytes
+ .../Anims/Unarmed/Jog/MF_Unarmed_Jog_Right.uasset  |  Bin 0 -> 131 bytes
+ .../Anims/Unarmed/Jump/MM_Fall_Loop.uasset         |  Bin 0 -> 131 bytes
+ .../Mannequins/Anims/Unarmed/Jump/MM_Jump.uasset   |  Bin 0 -> 131 bytes
+ .../Mannequins/Anims/Unarmed/Jump/MM_Land.uasset   |  Bin 0 -> 131 bytes
+ .../Mannequins/Anims/Unarmed/MM_Idle.uasset        |  Bin 0 -> 132 bytes
+ .../Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd.uasset  |  Bin 0 -> 131 bytes
+ .../Unarmed/Walk/MF_Unarmed_Walk_Bwd_Left.uasset   |  Bin 0 -> 131 bytes
+ .../Unarmed/Walk/MF_Unarmed_Walk_Bwd_Right.uasset  |  Bin 0 -> 131 bytes
+ .../Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd.uasset  |  Bin 0 -> 131 bytes
+ .../Unarmed/Walk/MF_Unarmed_Walk_Fwd_Left.uasset   |  Bin 0 -> 131 bytes
+ .../Unarmed/Walk/MF_Unarmed_Walk_Fwd_Right.uasset  |  Bin 0 -> 131 bytes
+ .../Anims/Unarmed/Walk/MF_Unarmed_Walk_Left.uasset |  Bin 0 -> 131 bytes
+ .../Unarmed/Walk/MF_Unarmed_Walk_Right.uasset      |  Bin 0 -> 131 bytes
+ .../Mannequins/Materials/M_Mannequin.uasset        |  Bin 0 -> 130 bytes
+ .../Materials/Manny/MI_Manny_01_New.uasset         |  Bin 0 -> 130 bytes
+ .../Materials/Manny/MI_Manny_02_New.uasset         |  Bin 0 -> 130 bytes
+ .../Mannequins/Materials/Quinn/MI_Quinn_01.uasset  |  Bin 0 -> 130 bytes
+ .../Mannequins/Materials/Quinn/MI_Quinn_02.uasset  |  Bin 0 -> 130 bytes
+ .../Mannequins/Meshes/SKM_Manny_Simple.uasset      |  Bin 0 -> 133 bytes
+ .../Mannequins/Meshes/SKM_Quinn_Simple.uasset      |  Bin 0 -> 133 bytes
+ .../Mannequins/Meshes/SK_Mannequin.uasset          |  Bin 0 -> 131 bytes
+ .../Mannequins/Rigs/CR_Mannequin_Body.uasset       |  Bin 0 -> 133 bytes
+ .../Mannequins/Rigs/CR_Mannequin_FootIK.uasset     |  Bin 0 -> 131 bytes
+ .../Characters/Mannequins/Rigs/PA_Mannequin.uasset |  Bin 0 -> 131 bytes
+ .../Mannequins/Textures/Manny/T_Manny_01_BN.uasset |  Bin 0 -> 132 bytes
+ .../Mannequins/Textures/Manny/T_Manny_01_D.uasset  |  Bin 0 -> 131 bytes
+ .../Textures/Manny/T_Manny_01_MRA.uasset           |  Bin 0 -> 131 bytes
+ .../Mannequins/Textures/Manny/T_Manny_02_BN.uasset |  Bin 0 -> 133 bytes
+ .../Mannequins/Textures/Manny/T_Manny_02_D.uasset  |  Bin 0 -> 132 bytes
+ .../Textures/Manny/T_Manny_02_MRA.uasset           |  Bin 0 -> 132 bytes
+ .../Mannequins/Textures/Quinn/T_Quinn_01_D.uasset  |  Bin 0 -> 131 bytes
+ .../Textures/Quinn/T_Quinn_01_MRA.uasset           |  Bin 0 -> 131 bytes
+ .../Mannequins/Textures/Quinn/T_Quinn_01_N.uasset  |  Bin 0 -> 132 bytes
+ .../Mannequins/Textures/Quinn/T_Quinn_02_D.uasset  |  Bin 0 -> 131 bytes
+ .../Textures/Quinn/T_Quinn_02_MRA.uasset           |  Bin 0 -> 131 bytes
+ .../Mannequins/Textures/Quinn/T_Quinn_02_N.uasset  |  Bin 0 -> 132 bytes
+ .../Mannequins/Textures/Shared/T_UE_Logo_M.uasset  |  Bin 0 -> 130 bytes
+ Content/FirstPerson/Anims/ABP_FP_Copy.uasset       |  Bin 0 -> 130 bytes
+ Content/FirstPerson/Anims/CtrlRig_FPWarp.uasset    |  Bin 0 -> 131 bytes
+ .../Blueprints/BP_FirstPersonCharacter.uasset      |  Bin 0 -> 130 bytes
+ .../BP_FirstPersonPlayerController.uasset          |  Bin 0 -> 130 bytes
+ Content/FirstPerson/MI_FirstPersonColorway.uasset  |  Bin 0 -> 129 bytes
+ Content/Input/Actions/IA_Jump.uasset               |  Bin 0 -> 129 bytes
+ Content/Input/Actions/IA_Look.uasset               |  Bin 0 -> 129 bytes
+ Content/Input/Actions/IA_MouseLook.uasset          |  Bin 0 -> 129 bytes
+ Content/Input/Actions/IA_Move.uasset               |  Bin 0 -> 129 bytes
+ Content/Input/IMC_Default.uasset                   |  Bin 0 -> 130 bytes
+ Content/Input/IMC_MouseLook.uasset                 |  Bin 0 -> 129 bytes
+ Content/Input/Touch/BPI_TouchInterface.uasset      |  Bin 0 -> 130 bytes
+ Content/Input/Touch/UI_Thumbstick.uasset           |  Bin 0 -> 131 bytes
+ Content/Input/Touch/UI_TouchSimple.uasset          |  Bin 0 -> 130 bytes
+ .../Materials/MI_DefaultColorway.uasset            |  Bin 0 -> 129 bytes
+ .../LevelPrototyping/Materials/M_FlatCol.uasset    |  Bin 0 -> 130 bytes
+ Content/Maps/Jeddah_RedSea_Assault.umap            |  Bin 0 -> 130 bytes
+ ...eddah_RedSea_Assault_HLODLayer_Instanced.uasset |  Bin 0 -> 129 bytes
+ .../Jeddah_RedSea_Assault_HLODLayer_Merged.uasset  |  Bin 0 -> 129 bytes
+ Content/Python/asww_validate_jeddah_map.py         |   85 +-
+ Content/Variant_Shooter/Anims/ABP_FP_Pistol.uasset |  Bin 0 -> 131 bytes
+ Content/Variant_Shooter/Anims/ABP_FP_Weapon.uasset |  Bin 0 -> 131 bytes
+ Content/Variant_Shooter/Anims/ABP_TP_Pistol.uasset |  Bin 0 -> 131 bytes
+ Content/Variant_Shooter/Anims/ABP_TP_Rifle.uasset  |  Bin 0 -> 131 bytes
+ .../Anims/Ctrl_HandAdjusment.uasset                |  Bin 0 -> 131 bytes
+ .../Anims/Ctrl_HandAdjusment_Pistol.uasset         |  Bin 0 -> 131 bytes
+ .../Anims/FP_Rifle_Shoot_Montage.uasset            |  Bin 0 -> 130 bytes
+ .../Blueprints/AI/BP_ShooterAIController.uasset    |  Bin 0 -> 130 bytes
+ .../Blueprints/AI/BP_ShooterNPC.uasset             |  Bin 0 -> 131 bytes
+ .../Blueprints/AI/BP_ShooterNPCSpawner.uasset      |  Bin 0 -> 131 bytes
+ .../Blueprints/AI/EQS/EQS_FindRoamLocation.uasset  |  Bin 0 -> 129 bytes
+ .../AI/EQS/EQS_FindSnipingLocation.uasset          |  Bin 0 -> 130 bytes
+ .../AI/EQS/EnvQueryContext_Target.uasset           |  Bin 0 -> 130 bytes
+ .../Blueprints/AI/ST_Shooter.uasset                |  Bin 0 -> 131 bytes
+ .../Blueprints/AI/ST_Shooter_ShootAtTarget.uasset  |  Bin 0 -> 131 bytes
+ ...tateTreeCondition_HasLineOfSightToTarget.uasset |  Bin 0 -> 131 bytes
+ .../AI/StateTree/StateTreeTask_FaceActor.uasset    |  Bin 0 -> 130 bytes
+ .../AI/StateTree/StateTreeTask_FaceLocation.uasset |  Bin 0 -> 130 bytes
+ .../AI/StateTree/StateTreeTask_SenseEnemies.uasset |  Bin 0 -> 131 bytes
+ .../StateTree/StateTreeTask_SetRandomFloat.uasset  |  Bin 0 -> 130 bytes
+ .../StateTree/StateTreeTask_ShootAtTarget.uasset   |  Bin 0 -> 130 bytes
+ .../Variant_Shooter/Blueprints/BPI_Shooter.uasset  |  Bin 0 -> 130 bytes
+ .../Variant_Shooter/Blueprints/BPI_Teammate.uasset |  Bin 0 -> 130 bytes
+ .../Blueprints/BP_ShooterCharacter.uasset          |  Bin 0 -> 131 bytes
+ .../Blueprints/BP_ShooterGameMode.uasset           |  Bin 0 -> 131 bytes
+ .../Blueprints/BP_ShooterPlayerController.uasset   |  Bin 0 -> 131 bytes
+ .../Blueprints/Pickups/BPI_Pickups.uasset          |  Bin 0 -> 130 bytes
+ .../Blueprints/Pickups/BPI_WeaponHolder.uasset     |  Bin 0 -> 130 bytes
+ .../Blueprints/Pickups/BP_ShooterPickup.uasset     |  Bin 0 -> 131 bytes
+ .../Blueprints/Pickups/BP_ShooterWeaponBase.uasset |  Bin 0 -> 131 bytes
+ .../Blueprints/Pickups/DT_WeaponList.uasset        |  Bin 0 -> 129 bytes
+ .../Projectiles/BP_ShooterProjectileBase.uasset    |  Bin 0 -> 131 bytes
+ .../Projectiles/BP_ShooterProjectile_Bullet.uasset |  Bin 0 -> 131 bytes
+ .../BP_ShooterProjectile_Grenade.uasset            |  Bin 0 -> 130 bytes
+ .../Projectiles/BP_Shooter_GrenadeExplosion.uasset |  Bin 0 -> 130 bytes
+ .../Projectiles/Materials/M_Explosion.uasset       |  Bin 0 -> 130 bytes
+ .../Projectiles/Meshes/SM_FoamBullet.uasset        |  Bin 0 -> 130 bytes
+ .../Blueprints/Pickups/ST_WeaponTableRow.uasset    |  Bin 0 -> 129 bytes
+ .../BP_ShooterWeapon_GrenadeLauncher.uasset        |  Bin 0 -> 130 bytes
+ .../Pickups/Weapons/BP_ShooterWeapon_Pistol.uasset |  Bin 0 -> 130 bytes
+ .../Pickups/Weapons/BP_ShooterWeapon_Rifle.uasset  |  Bin 0 -> 130 bytes
+ .../Variant_Shooter/Input/Actions/IA_Shoot.uasset  |  Bin 0 -> 129 bytes
+ .../Input/Actions/IA_SwapWeapon.uasset             |  Bin 0 -> 129 bytes
+ .../Variant_Shooter/Input/BPI_Touch_Shooter.uasset |  Bin 0 -> 130 bytes
+ Content/Variant_Shooter/Input/IMC_Weapons.uasset   |  Bin 0 -> 129 bytes
+ .../Input/UI_TouchInterface_Shooter.uasset         |  Bin 0 -> 130 bytes
+ Content/Variant_Shooter/Lvl_ArenaShooter.ini       |   17 +
+ Content/Variant_Shooter/Lvl_ArenaShooter.umap      |  Bin 0 -> 130 bytes
+ Content/Variant_Shooter/UI/M_BulletCounter.uasset  |  Bin 0 -> 130 bytes
+ Content/Variant_Shooter/UI/UI_Shooter.uasset       |  Bin 0 -> 130 bytes
+ .../UI/UI_ShooterBulletCounter.uasset              |  Bin 0 -> 131 bytes
+ .../Weapons/Definitions/DA_ASWW_Rifle_01.uasset    |  Bin 0 -> 129 bytes
+ .../Materials/M_ProjectileBullet.uasset            |  Bin 0 -> 130 bytes
+ .../Meshes/FirstPersonProjectileMesh.uasset        |  Bin 0 -> 130 bytes
+ .../Pistol/Materials/MI_Weapon_Pistol.uasset       |  Bin 0 -> 130 bytes
+ Content/Weapons/Pistol/Meshes/PA_Pistol.uasset     |  Bin 0 -> 129 bytes
+ Content/Weapons/Pistol/Meshes/SKM_Pistol.uasset    |  Bin 0 -> 131 bytes
+ Content/Weapons/Pistol/Meshes/SK_Pistol.uasset     |  Bin 0 -> 129 bytes
+ .../Weapons/Pistol/Textures/T_Pistol_AORM.uasset   |  Bin 0 -> 132 bytes
+ Content/Weapons/Pistol/Textures/T_Pistol_D.uasset  |  Bin 0 -> 131 bytes
+ .../Weapons/Pistol/Textures/T_Pistol_Masks.uasset  |  Bin 0 -> 130 bytes
+ Content/Weapons/Pistol/Textures/T_Pistol_N.uasset  |  Bin 0 -> 132 bytes
+ Content/Weapons/Rifle/Materials/M_Rifle.uasset     |  Bin 0 -> 130 bytes
+ Content/Weapons/Rifle/Materials/M_Weapon.uasset    |  Bin 0 -> 130 bytes
+ Content/Weapons/Rifle/Meshes/PA_Rifle.uasset       |  Bin 0 -> 129 bytes
+ Content/Weapons/Rifle/Meshes/SKM_Rifle.uasset      |  Bin 0 -> 132 bytes
+ Content/Weapons/Rifle/Meshes/SK_Rifle.uasset       |  Bin 0 -> 129 bytes
+ Content/Weapons/Rifle/Meshes/SM_Rifle.uasset       |  Bin 0 -> 131 bytes
+ Content/Weapons/Rifle/Textures/T_Rifle_BC.uasset   |  Bin 0 -> 131 bytes
+ Content/Weapons/Rifle/Textures/T_Rifle_N.uasset    |  Bin 0 -> 132 bytes
+ .../Input/Actions/IA_Grab_Left_Pressed.uasset      |  Bin 0 -> 129 bytes
+ .../Input/Actions/IA_Grab_Left_Released.uasset     |  Bin 0 -> 129 bytes
+ .../Input/Actions/IA_Grab_Right_Pressed.uasset     |  Bin 0 -> 129 bytes
+ .../Input/Actions/IA_Grab_Right_Released.uasset    |  Bin 0 -> 129 bytes
+ .../Input/Actions/IA_Menu_Toggle_Left.uasset       |  Bin 0 -> 129 bytes
+ .../Input/Actions/IA_Menu_Toggle_Right.uasset      |  Bin 0 -> 129 bytes
+ Content/XRFramework/Input/Actions/IA_Move.uasset   |  Bin 0 -> 129 bytes
+ Content/XRFramework/Input/Actions/IA_Turn.uasset   |  Bin 0 -> 129 bytes
+ .../BP_InputModifier_XAxisPositiveOnly.uasset      |  Bin 0 -> 130 bytes
+ .../0/P9/6CRNAOPR6HH4XZ22UI0VHF.uasset             |  Bin 0 -> 129 bytes
+ .../0/SL/QZDTJBGMFN6X7R2UO3762S.uasset             |  Bin 0 -> 129 bytes
+ .../2/4M/CL77QRTX5TZABCL6Z9AB02.uasset             |  Bin 0 -> 129 bytes
+ .../2/SH/1FHTDJXF9E7I5CQ8YS7WCV.uasset             |  Bin 0 -> 129 bytes
+ .../4/DI/9JLDMII8MXOHSP6TIGX2OV.uasset             |  Bin 0 -> 129 bytes
+ .../4/HT/QZDR6NK5VR2BLABW2WR31S.uasset             |  Bin 0 -> 129 bytes
+ .../5/EK/NL8A9PHK585G70HDG66O5M.uasset             |  Bin 0 -> 129 bytes
+ .../6/YX/8SQVYBVB4XK6QE7MAFTIRK.uasset             |  Bin 0 -> 129 bytes
+ .../8/3W/BHACZJC8VRBTL3R4IPF2H2.uasset             |  Bin 0 -> 129 bytes
+ .../8/GC/K0F3P5KD8BLWIVVIFCZGYG.uasset             |  Bin 0 -> 129 bytes
+ .../8/GP/OJNWP0S8L19WUX4NFNHWQX.uasset             |  Bin 0 -> 129 bytes
+ .../8/H5/61WZSA32AXRP1KSP54N0KU.uasset             |  Bin 0 -> 129 bytes
+ .../9/AX/Q48CC917XYKZJC67FSAQLJ.uasset             |  Bin 0 -> 129 bytes
+ .../9/TZ/DQ0U77YEDNU302BSO9VUEH.uasset             |  Bin 0 -> 129 bytes
+ .../B/0W/E6COY5AG83ESA1GHD50Q1E.uasset             |  Bin 0 -> 129 bytes
+ .../B/J3/RSRG84PBQK63ZBS3A9SQ8I.uasset             |  Bin 0 -> 129 bytes
+ .../C/1J/05LCSE4KSCJFQRC19JJBCN.uasset             |  Bin 0 -> 129 bytes
+ .../C/6L/U0BZ4MH8TI9WCFQEF6FL4T.uasset             |  Bin 0 -> 129 bytes
+ .../C/PT/VAJS0SEEB17ITW6ZKR9OEJ.uasset             |  Bin 0 -> 129 bytes
+ .../PRE_VERTICAL_CRITICAL_ASSET_MANIFEST.txt       |  195 ++
+ ...E_VERTICAL_EPIC_TEMPLATE_DISTRIBUTION_REVIEW.md |   30 +
+ RuntimeEvidence/PRE_VERTICAL_GIT_LOG.txt           |   23 +
+ RuntimeEvidence/PRE_VERTICAL_JEDDAH_INSPECTION.txt | 2127 ++++++++++++++++++++
+ RuntimeEvidence/PRE_VERTICAL_LOCAL_STATUS.txt      |  362 ++++
+ RuntimeEvidence/PRE_VERTICAL_PLAYER_V2_ANALYSIS.md |  101 +
+ RuntimeEvidence/PRE_VERTICAL_STAGED_FILES.txt      |  373 ++++
+ RuntimeEvidence/PRE_VERTICAL_STAGED_STAT.txt       |  715 +++++++
+ .../PRE_VERTICAL_TEMPLATE_PROVENANCE.txt           |  187 ++
+ RuntimeEvidence/PRE_VERTICAL_TRACKED_DIFF_STAT.txt |   33 +
+ RuntimeEvidence/PRE_VERTICAL_TRACKED_FILES.txt     |   32 +
+ .../PRE_VERTICAL_WORKTREE_CLASSIFICATION.md        |   50 +
+ .../PixelStreaming2/WebServers/get_ps_servers.bat  |  215 ++
+ .../PixelStreaming2/WebServers/get_ps_servers.sh   |  199 ++
+ Source/ArabiaStrikeWorldWar.Target.cs              |    4 +-
+ .../Private/AI/ASBossCharacter.cpp                 |    2 +-
+ .../Private/AI/ASBossWeakPoint.cpp                 |    2 +-
+ .../Private/AI/ASSoldierAIController.cpp           |    2 +-
+ .../Private/Combat/ASHealthComponent.cpp           |    2 +-
+ .../Private/Combat/ASProjectile.cpp                |   87 +-
+ .../Private/Combat/ASWeaponComponent.cpp           |  230 ++-
+ .../Private/Game/ASGameMode.cpp                    |    5 +-
+ .../Private/Mission/ASHostageNPC.cpp               |    2 +-
+ .../Private/Mission/ASMissionDirector.cpp          |    2 +-
+ .../Private/Mission/ASObjectiveVolume.cpp          |   46 +-
+ .../Private/Player/ASCharacter.cpp                 |  748 ++++++-
+ .../Private/Player/ASPlayerCharacterV2.cpp         |  651 ++++++
+ .../Vehicles/ASVehicleDamageModelComponent.cpp     |    2 +-
+ .../Private/Vehicles/ASVehicleTurretComponent.cpp  |    2 +-
+ .../Private/World/ASDynamicEncounterDirector.cpp   |    6 +-
+ .../Public/Combat/ASProjectile.h                   |   56 +-
+ .../Public/Combat/ASWeaponInventoryComponent.h     |    4 +-
+ .../Public/Mission/ASObjectiveVolume.h             |   37 +-
+ .../Public/Player/ASCharacter.h                    |  209 +-
+ .../Public/Player/ASPlayerCharacterV2.h            |  158 ++
+ .../Public/Vehicles/ASPilotableVehiclePawn.h       |    2 +-
+ .../Public/Vehicles/ASVehiclePawn.h                |    6 +-
+ .../Public/World/ASDynamicEncounterDirector.h      |    2 +
+ Source/ArabiaStrikeWorldWarEditor.Target.cs        |    4 +-
+ ci/static_cpp_sanity.py                            |   83 +
+ 373 files changed, 38983 insertions(+), 224 deletions(-)
+ create mode 100644 ASWW_AAA_IMPLEMENTATION_SEQUENCE.md
+ create mode 100644 ASWW_AB_TEST_RESTORE_UNARMED_KEEP_RIFLE_AND_PACKAGE.ps1
+ create mode 100644 ASWW_ADD_TEMP_PLAYER_CONTROL_TELEMETRY.ps1
+ create mode 100644 ASWW_ADD_TEMP_VISIBLE_PLAYER_PROOF_AND_PACKAGE.ps1
+ create mode 100644 ASWW_AFTER_DESCRIPTOR_PASS_PIPELINE.ps1
+ create mode 100644 ASWW_ANALYZE_EXISTING_PACKAGED_RUNTIME_LOG.ps1
+ create mode 100644 ASWW_AUDIT_COMBAT_DAMAGE_DEATH_RESPAWN_GATE.ps1
+ create mode 100644 ASWW_AUDIT_DUPLICATE_PROTOTYPE_ACTORS.ps1
+ create mode 100644 ASWW_AUDIT_TEMP_QA_MARKERS_BEFORE_CLEANUP.ps1
+ create mode 100644 ASWW_CAPTURE_POSSESSION_STREAMING_CLASSIFICATION.ps1
+ create mode 100644 ASWW_CONTINUE_REAL_MANNY_AFTER_SAFE_VERIFY_V4.ps1
+ create mode 100644 ASWW_CONVERT_JEDDAH_TO_WP_AND_VALIDATE.ps1
+ create mode 100644 ASWW_COPY_SHARED_TEMPLATE_MANNY_INTEGRATE_AND_PACKAGE_V2.ps1
+ create mode 100644 ASWW_COPY_TP_MANNY_DEPS_INTEGRATE_AND_PACKAGE.ps1
+ create mode 100644 ASWW_DEEP_COMPARE_DUPLICATES_READONLY.ps1
+ create mode 100644 ASWW_DIAGNOSE_JEDDAH_GENERATION.ps1
+ create mode 100644 ASWW_DIAGNOSE_PACKAGED_POSSESSION_STREAMING.ps1
+ create mode 100644 ASWW_DIAGNOSE_PIE_DISCOVERY.ps1
+ create mode 100644 ASWW_DIAGNOSE_PIE_ENEMY_STREAMING.ps1
+ create mode 100644 ASWW_DIAGNOSE_PIE_EXIT5.ps1
+ create mode 100644 ASWW_DIAGNOSE_PLAYER_CONTROL_BINDINGS.ps1
+ create mode 100644 ASWW_DIAGNOSE_PLAYER_PRESENTATION_CAMERA.ps1
+ create mode 100644 ASWW_DIAGNOSE_THIRDPERSON_TEMPLATE_SOURCE_V3.ps1
+ create mode 100644 ASWW_DISCOVER_REAL_PLAYER_ASSETS.ps1
+ create mode 100644 ASWW_EXTEND_TEMP_MOVEMENT_TELEMETRY.ps1
+ create mode 100644 ASWW_EXTRACT_JEDDAH_VALIDATION_ERROR.ps1
+ create mode 100644 ASWW_EXTRACT_WP_CONVERT_ERROR.ps1
+ create mode 100644 ASWW_FIX_INI_EOF_BLANK_LINES.ps1
+ create mode 100644 ASWW_FIX_MOVEMENT_TELEMETRY_COMPILE_AND_PACKAGE.ps1
+ create mode 100644 ASWW_FIX_PIE_EXITCODE_GUARD_AND_RERUN.ps1
+ create mode 100644 ASWW_FIX_PIE_LOGGING_AND_RERUN.ps1
+ create mode 100644 ASWW_FIX_PROMOTE_CRLF.ps1
+ create mode 100644 ASWW_FIX_VALIDATOR_LOGGING_AND_CONTINUE.ps1
+ create mode 100644 ASWW_IMPORT_THIRDPERSON_MANNEQUIN_FROM_FEATUREPACK.ps1
+ create mode 100644 ASWW_IMPORT_THIRDPERSON_MANNEQUIN_FROM_FEATUREPACK_V2.ps1
+ create mode 100644 ASWW_IMPORT_VERIFY_TP_RIFLE_ABP_AND_PACKAGE.ps1
+ create mode 100644 ASWW_IMPORT_VERIFY_TP_RIFLE_ABP_AND_PACKAGE_V2.ps1
+ create mode 100644 ASWW_INTEGRATE_REAL_RIFLE_STATICMESH_AND_PACKAGE_V3.ps1
+ create mode 100644 ASWW_INTEGRATE_REAL_RIFLE_VISUAL_AND_PACKAGE.ps1
+ create mode 100644 ASWW_INTEGRATE_REAL_RIFLE_VISUAL_AND_PACKAGE_V2.ps1
+ create mode 100644 ASWW_LAUNCH_MANUAL_PACKAGED_QA.ps1
+ create mode 100644 ASWW_MANUAL_PACKAGED_QA_CHECKLIST.txt
+ create mode 100644 ASWW_OFFLINE_CONTINUE.ps1
+ create mode 100644 ASWW_OFFLINE_FIX_AND_RESUME_PHASE2.ps1
+ create mode 100644 ASWW_OFFLINE_PHASE2_POST_BUILD.ps1
+ create mode 100644 ASWW_OFFLINE_PHASE2_POST_BUILD_SAFECRLF.ps1
+ create mode 100644 ASWW_PACKAGED_RUNTIME_SMOKE_V2_CLEAN_CMDLINE.ps1
+ create mode 100644 ASWW_PACKAGED_RUNTIME_STARTUP_SMOKE.ps1
+ create mode 100644 ASWW_PACKAGE_WIN64_OUTSIDE_ONEDRIVE.ps1
+ create mode 100644 ASWW_PATCH_PIE_WRAPPER_AND_PACKAGE_WIN64.ps1
+ create mode 100644 ASWW_PHASE_01_FIX_CONSTRUCTOR_AND_REPACKAGE.ps1
+ create mode 100644 ASWW_PHASE_01_FIX_V2_DERIVED_CONSTRUCTOR_ONLY.ps1
+ create mode 100644 ASWW_PHASE_01_PLAYER_FOUNDATION_QA.ps1
+ create mode 100644 ASWW_PHASE_01_PLAYER_FOUNDATION_V1.ps1
+ create mode 100644 ASWW_PHASE_02A_DISCOVER_SHOOTER_TEMPLATE_CONTRACT.ps1
+ create mode 100644 ASWW_PHASE_02B_CLOSE_SHOOTER_DEPENDENCIES.ps1
+ create mode 100644 ASWW_PHASE_02C_IMPORT_ONLY_MISSING_SHOOTER_PACKAGES.ps1
+ create mode 100644 ASWW_PHASE_02D_RECURSIVE_TEMPLATE_DEPENDENCY_CLOSURE.ps1
+ create mode 100644 ASWW_PHASE_02E_FIND_QUINN_AND_FINISH_CLOSURE.ps1
+ create mode 100644 ASWW_PHASE_02F_EXTRACT_QUINN_FROM_UE_ARCHIVES_AND_FINISH.ps1
+ create mode 100644 ASWW_PHASE_03A_BUILD_COMBAT_PLAYER_V1.ps1
+ create mode 100644 ASWW_PHASE_03A_CPP_ONLY_COMBAT_RECOVERY_NOUBA.ps1
+ create mode 100644 ASWW_PHASE_03A_FIX_UHT_HEADER_AND_REPACKAGE.ps1
+ create mode 100644 ASWW_PHASE_03A_RESUME_REAL_BUILD_V2.ps1
+ create mode 100644 ASWW_PHASE_03B_COMBAT_PLAYER_V1_QA.ps1
+ create mode 100644 ASWW_PHASE_03C_AB_RESTORE_PROVEN_LOCOMOTION_KEEP_RIFLE.ps1
+ create mode 100644 ASWW_PHASE_03C_CONTROL_RECOVERY_QA.ps1
+ create mode 100644 ASWW_PHASE_03D_JUMP_RELOAD_INPUT_PROOF.ps1
+ create mode 100644 ASWW_PHASE_03D_JUMP_RELOAD_QA.ps1
+ create mode 100644 ASWW_PHASE_03E_FIX_Z_GROUND_GLITCH_AND_RELOAD_DIAGNOSTIC.ps1
+ create mode 100644 ASWW_PHASE_03E_V2_FIX_Z_RELOAD_EXACT_WEAPON_PATCH.ps1
+ create mode 100644 ASWW_PHASE_03E_Z_RELOAD_QA.ps1
+ create mode 100644 ASWW_PHASE_03F_FIX_Z_EXIT_AND_EQUIP_RIFLE_DEFINITION.ps1
+ create mode 100644 ASWW_PHASE_03F_V2_RESUME_Z_EXIT_AND_RIFLE_DEFINITION.ps1
+ create mode 100644 ASWW_PHASE_03F_Z_RELOAD_RUNTIME_QA.ps1
+ create mode 100644 ASWW_PHASE_03G_DISABLE_Z_AND_PROVE_FIRE_RELOAD.ps1
+ create mode 100644 ASWW_PHASE_03G_FIRE_RELOAD_QA.ps1
+ create mode 100644 ASWW_PINPOINT_COMBAT_RUNTIME_BLOCKERS.ps1
+ create mode 100644 ASWW_PINPOINT_MANNY_MOUNT_AND_TEMPLATE_SOURCE.ps1
+ create mode 100644 ASWW_PINPOINT_PACKAGED_PLAYER_STARTUP.ps1
+ create mode 100644 ASWW_PINPOINT_STANDARD_MANNEQUIN_SOURCE_V2.ps1
+ create mode 100644 ASWW_PINPOINT_WEAPON_DEFAULTS_AND_SELECT_REAL_ASSET_V3.ps1
+ create mode 100644 ASWW_RECOVER_STAGE_LOCK_AND_RERUN_PACKAGE.ps1
+ create mode 100644 ASWW_RECOVER_TACTICAL_RIFLE_DISCOVERY_V2.ps1
+ create mode 100644 ASWW_RECOVER_TACTICAL_RIFLE_DISCOVERY_V3.ps1
+ create mode 100644 ASWW_RECOVER_TACTICAL_RIFLE_DISCOVERY_V4.ps1
+ create mode 100644 ASWW_REMOVE_TEMP_TELEMETRY_KEEP_MANNY_AND_PACKAGE.ps1
+ create mode 100644 ASWW_REMOVE_TEMP_TELEMETRY_KEEP_MANNY_AND_PACKAGE_V2.ps1
+ create mode 100644 ASWW_REPAIR_EXACTLY_3_PROTOTYPE_ENEMIES_AND_PIE.ps1
+ create mode 100644 ASWW_REPAIR_STAGINGDIR_AND_PACKAGE.ps1
+ create mode 100644 ASWW_RESUME_JEDDAH_REPAIR_FORWARD_SLASH.ps1
+ create mode 100644 ASWW_RUN_CLEAN_REAL_MANNY_QA.ps1
+ create mode 100644 ASWW_RUN_EXACT_PIE_TEST.ps1
+ create mode 100644 ASWW_RUN_MOVEMENT_TELEMETRY.ps1
+ create mode 100644 ASWW_RUN_PACKAGED_COMBAT_DAMAGE_DEATH_RESPAWN_QA.ps1
+ create mode 100644 ASWW_RUN_PLAYER_CONTROL_TELEMETRY.ps1
+ create mode 100644 ASWW_RUN_PLAYER_REGRESSION_AB_QA.ps1
+ create mode 100644 ASWW_RUN_REAL_MANNY_PACKAGED_QA.ps1
+ create mode 100644 ASWW_RUN_REAL_RIFLE_COMBAT_QA (1).ps1
+ create mode 100644 ASWW_RUN_REAL_RIFLE_COMBAT_QA.ps1
+ create mode 100644 ASWW_RUN_TACTICAL_RIFLE_VISUAL_QA.ps1
+ create mode 100644 ASWW_RUN_TP_RIFLE_TACTICAL_VISUAL_QA_V2 (1).ps1
+ create mode 100644 ASWW_RUN_TP_RIFLE_TACTICAL_VISUAL_QA_V2.ps1
+ create mode 100644 ASWW_RUN_TP_RIFLE_TACTICAL_VISUAL_QA_V3_INTERACTIVE.ps1
+ create mode 100644 ASWW_RUN_VISIBLE_PLAYER_PROOF_QA.ps1
+ create mode 100644 ASWW_SAFEARG_VERIFY_MANNY_INTEGRATE_PACKAGE_V3.ps1
+ create mode 100644 ASWW_SAFE_CLEAN_DUPLICATE_PROTOTYPES_AND_PIE.ps1
+ create mode 100644 ASWW_SMART_REPAIR_JEDDAH_CONTENT_AND_VALIDATE.ps1
+ create mode 100644 ASWW_UPGRADE_RIFLE_TACTICAL_STANCE_AND_PACKAGE.ps1
+ create mode 100644 ASWW_VALIDATE_JEDDAH_WP_CORRECTED.ps1
+ create mode 100644 ASWW_VALIDATE_JEDDAH_WP_DESCRIPTORS.ps1
+ create mode 100644 ASWW_VERIFY_AND_IMPORT_TEMPLATE_MANNY_DEPENDENCIES.ps1
+ create mode 100644 ASWW_VERIFY_CONTROLRIG_ACL_RUNTIME_AVAILABILITY.ps1
+ create mode 100644 ASWW_VERIFY_MANNY_ASSETS_AND_COMPATIBILITY.ps1
+ create mode 100644 ASWW_VERIFY_PIE_DISCOVERY_PREREQS.ps1
+ create mode 100644 ASWW_VERIFY_TRUE_THIRDPERSON_RUNTIME_DEPS_V2.ps1
+ create mode 100644 ASWW_VERIFY_WEAPON_RUNTIME_DEFAULTS_AND_DISCOVER_MESH.ps1
+ create mode 100644 ASWW_VERIFY_WEAPON_RUNTIME_DEFAULTS_AND_DISCOVER_MESH_V2.ps1
+ create mode 100644 Content/Characters/Mannequins/Anims/Pistol/Aim/AO_Pistol.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS1.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CD.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Pistol/Aim/MF_Pistol_Idle_ADS_AO_CU.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Pistol/MF_Pistol_Idle_ADS.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/AIM/AO_Rifle.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CC.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CD.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/AIM/MM_Rifle_Idle_ADS_AO_CU.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Back_Med_01.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Hvy_01.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_01.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_02.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_03.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Lgt_04.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_01.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_02.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Bwd_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Fwd_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jog/MF_Rifle_Jog_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Apex.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Land.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Fall_Loop.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_RecoveryAdditive.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Jump/MM_Rifle_Jump_Start_Loop.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/MF_Rifle_Idle_ADS.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_DryFire.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Equip.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Fire.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/MM_Rifle_Reload.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Bwd_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Fwd_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Rifle/Walk/MF_Rifle_Walk_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/ABP_Unarmed.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/BS_Idle_Walk_Run.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Bwd_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Fwd_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jog/MF_Unarmed_Jog_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Fall_Loop.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Jump.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Jump/MM_Land.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/MM_Idle.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Bwd_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Left.uasset
+ create mode 100644 Content/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Right.uasset
+ create mode 100644 Content/Characters/Mannequins/Materials/M_Mannequin.uasset
+ create mode 100644 Content/Characters/Mannequins/Materials/Manny/MI_Manny_01_New.uasset
+ create mode 100644 Content/Characters/Mannequins/Materials/Manny/MI_Manny_02_New.uasset
+ create mode 100644 Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_01.uasset
+ create mode 100644 Content/Characters/Mannequins/Materials/Quinn/MI_Quinn_02.uasset
+ create mode 100644 Content/Characters/Mannequins/Meshes/SKM_Manny_Simple.uasset
+ create mode 100644 Content/Characters/Mannequins/Meshes/SKM_Quinn_Simple.uasset
+ create mode 100644 Content/Characters/Mannequins/Meshes/SK_Mannequin.uasset
+ create mode 100644 Content/Characters/Mannequins/Rigs/CR_Mannequin_Body.uasset
+ create mode 100644 Content/Characters/Mannequins/Rigs/CR_Mannequin_FootIK.uasset
+ create mode 100644 Content/Characters/Mannequins/Rigs/PA_Mannequin.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Manny/T_Manny_01_BN.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Manny/T_Manny_01_D.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Manny/T_Manny_01_MRA.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Manny/T_Manny_02_BN.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Manny/T_Manny_02_D.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Manny/T_Manny_02_MRA.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_D.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_MRA.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Quinn/T_Quinn_01_N.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_D.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_MRA.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Quinn/T_Quinn_02_N.uasset
+ create mode 100644 Content/Characters/Mannequins/Textures/Shared/T_UE_Logo_M.uasset
+ create mode 100644 Content/FirstPerson/Anims/ABP_FP_Copy.uasset
+ create mode 100644 Content/FirstPerson/Anims/CtrlRig_FPWarp.uasset
+ create mode 100644 Content/FirstPerson/Blueprints/BP_FirstPersonCharacter.uasset
+ create mode 100644 Content/FirstPerson/Blueprints/BP_FirstPersonPlayerController.uasset
+ create mode 100644 Content/FirstPerson/MI_FirstPersonColorway.uasset
+ create mode 100644 Content/Input/Actions/IA_Jump.uasset
+ create mode 100644 Content/Input/Actions/IA_Look.uasset
+ create mode 100644 Content/Input/Actions/IA_MouseLook.uasset
+ create mode 100644 Content/Input/Actions/IA_Move.uasset
+ create mode 100644 Content/Input/IMC_Default.uasset
+ create mode 100644 Content/Input/IMC_MouseLook.uasset
+ create mode 100644 Content/Input/Touch/BPI_TouchInterface.uasset
+ create mode 100644 Content/Input/Touch/UI_Thumbstick.uasset
+ create mode 100644 Content/Input/Touch/UI_TouchSimple.uasset
+ create mode 100644 Content/LevelPrototyping/Materials/MI_DefaultColorway.uasset
+ create mode 100644 Content/LevelPrototyping/Materials/M_FlatCol.uasset
+ create mode 100644 Content/Maps/Jeddah_RedSea_Assault.umap
+ create mode 100644 Content/Maps/Jeddah_RedSea_Assault_HLODLayer_Instanced.uasset
+ create mode 100644 Content/Maps/Jeddah_RedSea_Assault_HLODLayer_Merged.uasset
+ create mode 100644 Content/Variant_Shooter/Anims/ABP_FP_Pistol.uasset
+ create mode 100644 Content/Variant_Shooter/Anims/ABP_FP_Weapon.uasset
+ create mode 100644 Content/Variant_Shooter/Anims/ABP_TP_Pistol.uasset
+ create mode 100644 Content/Variant_Shooter/Anims/ABP_TP_Rifle.uasset
+ create mode 100644 Content/Variant_Shooter/Anims/Ctrl_HandAdjusment.uasset
+ create mode 100644 Content/Variant_Shooter/Anims/Ctrl_HandAdjusment_Pistol.uasset
+ create mode 100644 Content/Variant_Shooter/Anims/FP_Rifle_Shoot_Montage.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/BP_ShooterAIController.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/BP_ShooterNPC.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/BP_ShooterNPCSpawner.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/EQS/EQS_FindRoamLocation.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/EQS/EQS_FindSnipingLocation.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/EQS/EnvQueryContext_Target.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/ST_Shooter.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/ST_Shooter_ShootAtTarget.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/StateTree/StateTreeCondition_HasLineOfSightToTarget.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/StateTree/StateTreeTask_FaceActor.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/StateTree/StateTreeTask_FaceLocation.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/StateTree/StateTreeTask_SenseEnemies.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/StateTree/StateTreeTask_SetRandomFloat.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/AI/StateTree/StateTreeTask_ShootAtTarget.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/BPI_Shooter.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/BPI_Teammate.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/BP_ShooterCharacter.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/BP_ShooterGameMode.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/BP_ShooterPlayerController.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/BPI_Pickups.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/BPI_WeaponHolder.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/BP_ShooterPickup.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/BP_ShooterWeaponBase.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/DT_WeaponList.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Projectiles/BP_ShooterProjectileBase.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Projectiles/BP_ShooterProjectile_Bullet.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Projectiles/BP_ShooterProjectile_Grenade.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Projectiles/BP_Shooter_GrenadeExplosion.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Projectiles/Materials/M_Explosion.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Projectiles/Meshes/SM_FoamBullet.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/ST_WeaponTableRow.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Weapons/BP_ShooterWeapon_GrenadeLauncher.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Weapons/BP_ShooterWeapon_Pistol.uasset
+ create mode 100644 Content/Variant_Shooter/Blueprints/Pickups/Weapons/BP_ShooterWeapon_Rifle.uasset
+ create mode 100644 Content/Variant_Shooter/Input/Actions/IA_Shoot.uasset
+ create mode 100644 Content/Variant_Shooter/Input/Actions/IA_SwapWeapon.uasset
+ create mode 100644 Content/Variant_Shooter/Input/BPI_Touch_Shooter.uasset
+ create mode 100644 Content/Variant_Shooter/Input/IMC_Weapons.uasset
+ create mode 100644 Content/Variant_Shooter/Input/UI_TouchInterface_Shooter.uasset
+ create mode 100644 Content/Variant_Shooter/Lvl_ArenaShooter.ini
+ create mode 100644 Content/Variant_Shooter/Lvl_ArenaShooter.umap
+ create mode 100644 Content/Variant_Shooter/UI/M_BulletCounter.uasset
+ create mode 100644 Content/Variant_Shooter/UI/UI_Shooter.uasset
+ create mode 100644 Content/Variant_Shooter/UI/UI_ShooterBulletCounter.uasset
+ create mode 100644 Content/Weapons/Definitions/DA_ASWW_Rifle_01.uasset
+ create mode 100644 Content/Weapons/GrenadeLauncher/Materials/M_ProjectileBullet.uasset
+ create mode 100644 Content/Weapons/GrenadeLauncher/Meshes/FirstPersonProjectileMesh.uasset
+ create mode 100644 Content/Weapons/Pistol/Materials/MI_Weapon_Pistol.uasset
+ create mode 100644 Content/Weapons/Pistol/Meshes/PA_Pistol.uasset
+ create mode 100644 Content/Weapons/Pistol/Meshes/SKM_Pistol.uasset
+ create mode 100644 Content/Weapons/Pistol/Meshes/SK_Pistol.uasset
+ create mode 100644 Content/Weapons/Pistol/Textures/T_Pistol_AORM.uasset
+ create mode 100644 Content/Weapons/Pistol/Textures/T_Pistol_D.uasset
+ create mode 100644 Content/Weapons/Pistol/Textures/T_Pistol_Masks.uasset
+ create mode 100644 Content/Weapons/Pistol/Textures/T_Pistol_N.uasset
+ create mode 100644 Content/Weapons/Rifle/Materials/M_Rifle.uasset
+ create mode 100644 Content/Weapons/Rifle/Materials/M_Weapon.uasset
+ create mode 100644 Content/Weapons/Rifle/Meshes/PA_Rifle.uasset
+ create mode 100644 Content/Weapons/Rifle/Meshes/SKM_Rifle.uasset
+ create mode 100644 Content/Weapons/Rifle/Meshes/SK_Rifle.uasset
+ create mode 100644 Content/Weapons/Rifle/Meshes/SM_Rifle.uasset
+ create mode 100644 Content/Weapons/Rifle/Textures/T_Rifle_BC.uasset
+ create mode 100644 Content/Weapons/Rifle/Textures/T_Rifle_N.uasset
+ create mode 100644 Content/XRFramework/Input/Actions/IA_Grab_Left_Pressed.uasset
+ create mode 100644 Content/XRFramework/Input/Actions/IA_Grab_Left_Released.uasset
+ create mode 100644 Content/XRFramework/Input/Actions/IA_Grab_Right_Pressed.uasset
+ create mode 100644 Content/XRFramework/Input/Actions/IA_Grab_Right_Released.uasset
+ create mode 100644 Content/XRFramework/Input/Actions/IA_Menu_Toggle_Left.uasset
+ create mode 100644 Content/XRFramework/Input/Actions/IA_Menu_Toggle_Right.uasset
+ create mode 100644 Content/XRFramework/Input/Actions/IA_Move.uasset
+ create mode 100644 Content/XRFramework/Input/Actions/IA_Turn.uasset
+ create mode 100644 Content/XRFramework/Input/BP_InputModifier_XAxisPositiveOnly.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/0/P9/6CRNAOPR6HH4XZ22UI0VHF.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/0/SL/QZDTJBGMFN6X7R2UO3762S.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/2/4M/CL77QRTX5TZABCL6Z9AB02.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/2/SH/1FHTDJXF9E7I5CQ8YS7WCV.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/4/DI/9JLDMII8MXOHSP6TIGX2OV.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/4/HT/QZDR6NK5VR2BLABW2WR31S.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/5/EK/NL8A9PHK585G70HDG66O5M.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/6/YX/8SQVYBVB4XK6QE7MAFTIRK.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/8/3W/BHACZJC8VRBTL3R4IPF2H2.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/8/GC/K0F3P5KD8BLWIVVIFCZGYG.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/8/GP/OJNWP0S8L19WUX4NFNHWQX.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/8/H5/61WZSA32AXRP1KSP54N0KU.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/9/AX/Q48CC917XYKZJC67FSAQLJ.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/9/TZ/DQ0U77YEDNU302BSO9VUEH.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/B/0W/E6COY5AG83ESA1GHD50Q1E.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/B/J3/RSRG84PBQK63ZBS3A9SQ8I.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/C/1J/05LCSE4KSCJFQRC19JJBCN.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/C/6L/U0BZ4MH8TI9WCFQEF6FL4T.uasset
+ create mode 100644 Content/__ExternalActors__/Maps/Jeddah_RedSea_Assault/C/PT/VAJS0SEEB17ITW6ZKR9OEJ.uasset
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_CRITICAL_ASSET_MANIFEST.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_EPIC_TEMPLATE_DISTRIBUTION_REVIEW.md
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_GIT_LOG.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_JEDDAH_INSPECTION.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_LOCAL_STATUS.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_PLAYER_V2_ANALYSIS.md
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_STAGED_FILES.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_STAGED_STAT.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_TEMPLATE_PROVENANCE.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_TRACKED_DIFF_STAT.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_TRACKED_FILES.txt
+ create mode 100644 RuntimeEvidence/PRE_VERTICAL_WORKTREE_CLASSIFICATION.md
+ create mode 100644 Samples/PixelStreaming2/WebServers/get_ps_servers.bat
+ create mode 100644 Samples/PixelStreaming2/WebServers/get_ps_servers.sh
+ create mode 100644 Source/ArabiaStrikeWorldWar/Private/Player/ASPlayerCharacterV2.cpp
+ create mode 100644 Source/ArabiaStrikeWorldWar/Public/Player/ASPlayerCharacterV2.h

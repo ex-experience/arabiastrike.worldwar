@@ -1,6 +1,7 @@
-#include "Game/ASGameMode.h"
+﻿#include "Game/ASGameMode.h"
 #include "Game/ASGameState.h"
 #include "Player/ASCharacter.h"
+#include "Player/ASPlayerCharacterV2.h"
 #include "Player/ASPlayerController.h"
 #include "Player/ASPlayerState.h"
 #include "GameFramework/GameStateBase.h"
@@ -10,7 +11,7 @@
 
 AASGameMode::AASGameMode()
 {
-    DefaultPawnClass = AASCharacter::StaticClass();
+    DefaultPawnClass = AASPlayerCharacterV2::StaticClass();
     PlayerControllerClass = AASPlayerController::StaticClass();
     PlayerStateClass = AASPlayerState::StaticClass();
     GameStateClass = AASGameState::StaticClass();

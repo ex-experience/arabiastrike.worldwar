@@ -82,6 +82,88 @@ chat_state_start=chat_header.find('MaxChatMessageLength')
 chat_state=chat_header[chat_state_start:] if chat_state_start >= 0 else ''
 if 'TArray<' in chat_state or 'TMap<' in chat_state:
     errors.append('chat limiter state must not use dynamically growing containers')
+
+# Sprint and dash authority checks prove source structure only. Runtime correction,
+# prediction, cooldown and remote movement behavior still require real multiplayer PIE.
+character_header_path=SRC/'Public/Player/ASCharacter.h'
+character_cpp_path=SRC/'Private/Player/ASCharacter.cpp'
+character_header=character_header_path.read_text(encoding='utf-8',errors='ignore')
+character_cpp=character_cpp_path.read_text(encoding='utf-8',errors='ignore')
+
+movement_markers={
+    'fixed walk speed': 'float WalkSpeed = 520.f;',
+    'fixed sprint speed': 'float SprintSpeed = 820.f;',
+    'boolean sprint server RPC': 'void ServerSetSprinting(bool bWantsToSprint);',
+    'parameterless dash server RPC': 'void ServerDash();',
+    'custom character movement component': 'class ARABIASTRIKEWORLDWAR_API UASCharacterMovementComponent',
+    'compressed sprint flag decode': 'UpdateFromCompressedFlags(uint8 Flags)',
+    'server-only dash timestamp': 'LastDashServerTimeSeconds',
+}
+for label,marker in movement_markers.items():
+    if marker not in character_header:
+        errors.append(f'movement authority missing {label}: {character_header_path.relative_to(ROOT)}')
+
+prediction_markers={
+    'saved move type': 'class FSavedMove_ASCharacter',
+    'compressed sprint flag': 'FLAG_Custom_0',
+    'move combination boundary': 'bSavedWantsToSprint != NewCharacterMove->bSavedWantsToSprint',
+    'saved sprint intent': 'bSavedWantsToSprint = Movement && Movement->HasSprintIntent()',
+    'custom prediction allocation': 'new FSavedMove_ASCharacter()',
+    'custom movement installation': 'SetDefaultSubobjectClass<UASCharacterMovementComponent>',
+}
+for label,marker in prediction_markers.items():
+    if marker not in character_cpp:
+        errors.append(f'movement prediction missing {label}: {character_cpp_path.relative_to(ROOT)}')
+
+sprint_rpc_match=re.search(
+    r'UFUNCTION\(Server,\s*Reliable\)\s*void\s+ServerSetSprinting\s*\(([^)]*)\)',
+    character_header,
+    re.S,
+)
+if not sprint_rpc_match:
+    errors.append('sprint intent must have exactly one Reliable server declaration')
+else:
+    sprint_parameters=sprint_rpc_match.group(1).strip()
+    if sprint_parameters != 'bool bWantsToSprint':
+        errors.append('sprint RPC may accept only a boolean intent')
+    if re.search(r'(?i)speed|velocity|time|timestamp', sprint_parameters):
+        errors.append('sprint RPC accepts a client-controlled speed, velocity or timestamp')
+
+server_sprint_start=character_cpp.find('void AASCharacter::ServerSetSprinting_Implementation')
+server_sprint_end=character_cpp.find('void AASCharacter::Dash()', server_sprint_start)
+server_sprint_block=character_cpp[server_sprint_start:server_sprint_end] if server_sprint_start >= 0 and server_sprint_end > server_sprint_start else ''
+for marker in ('HasAuthority()', '!bDowned', '!bEliminated', 'SetSprintIntent('):
+    if marker not in server_sprint_block:
+        errors.append(f'server sprint validation missing: {marker}')
+
+dash_input_start=character_cpp.find('void AASCharacter::Dash()')
+dash_server_start=character_cpp.find('void AASCharacter::ServerDash_Implementation()', dash_input_start)
+dash_input_block=character_cpp[dash_input_start:dash_server_start] if dash_input_start >= 0 and dash_server_start > dash_input_start else ''
+dash_server_end=character_cpp.find('void AASCharacter::FirePressed()', dash_server_start)
+dash_server_block=character_cpp[dash_server_start:dash_server_end] if dash_server_start >= 0 and dash_server_end > dash_server_start else ''
+if 'LaunchCharacter(' in dash_input_block:
+    errors.append('dash input performs a client-local LaunchCharacter')
+for label,marker in {
+    'authority check': 'HasAuthority()',
+    'downed rejection': 'bDowned',
+    'eliminated rejection': 'bEliminated',
+    'world monotonic clock': 'World->GetTimeSeconds()',
+    'server cooldown timestamp': 'LastDashServerTimeSeconds',
+    'server-owned cooldown': 'DashCooldown',
+    'authoritative orientation': 'GetActorForwardVector()',
+    'authoritative launch': 'LaunchCharacter(',
+}.items():
+    if marker not in dash_server_block:
+        errors.append(f'server dash missing {label}: {marker}')
+
+for function_name in ('EnterDownedState', 'FinalizeBleedout', 'InitializeForRespawn'):
+    start=character_cpp.find(f'void AASCharacter::{function_name}')
+    next_function=character_cpp.find('\nvoid AASCharacter::', start + 1)
+    block=character_cpp[start:next_function if next_function >= 0 else None] if start >= 0 else ''
+    if 'ForceSprintOff();' not in block:
+        errors.append(f'{function_name} does not force sprint off')
+if 'LastDashServerTimeSeconds = -1000.0;' not in character_cpp[character_cpp.find('void AASCharacter::InitializeForRespawn'):]:
+    errors.append('respawn does not reset the server dash cooldown state')
 if errors:
     print('ASWW STATIC C++ SANITY: FAIL')
     for e in errors: print(' -',e)
@@ -89,3 +171,4 @@ if errors:
 print('ASWW STATIC C++ SANITY: PASS')
 print(f'headers={len(list(SRC.rglob("*.h")))} cpp={len(list(SRC.rglob("*.cpp")))}')
 print('chat_rate_limit=STATIC_POLICY_CHECK_PASS_RUNTIME_NOT_VERIFIED')
+print('movement_authority=STATIC_SAVED_MOVE_AND_SERVER_RPC_CHECK_PASS_RUNTIME_NOT_VERIFIED')

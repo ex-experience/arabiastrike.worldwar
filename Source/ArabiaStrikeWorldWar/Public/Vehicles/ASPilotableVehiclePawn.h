@@ -22,5 +22,5 @@ protected:
     UPROPERTY(EditDefaultsOnly) float TurnRate=65.f;
     UPROPERTY() TObjectPtr<APawn> StoredDriverPawn;
     void Throttle(float V); void Steer(float V); void FireTurret(); void AimTurret(float Value);
-    UFUNCTION(Server,Reliable) void ServerExit(APlayerController* Controller);
+    UFUNCTION(Server,Reliable) void ServerExit(APlayerController* InController);
 };

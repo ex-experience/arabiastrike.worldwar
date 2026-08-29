@@ -51,14 +51,14 @@ if (-not [IO.File]::Exists($EngineConfig)) {
 $ConfigText = Get-Content -Raw -LiteralPath $EngineConfig
 $AllowedGameDefaults = @("GameDefaultMap=/Engine/Maps/Entry", "GameDefaultMap=$MapPackage")
 $AllowedServerDefaults = @("ServerDefaultMap=/Engine/Maps/Entry", "ServerDefaultMap=$MapPackage")
-$CurrentGameDefault = [regex]::Match($ConfigText, '(?m)^GameDefaultMap=.*$').Value
-$CurrentServerDefault = [regex]::Match($ConfigText, '(?m)^ServerDefaultMap=.*$').Value
+$CurrentGameDefault = [regex]::Match($ConfigText, '(?m)^GameDefaultMap=[^\r\n]*').Value
+$CurrentServerDefault = [regex]::Match($ConfigText, '(?m)^ServerDefaultMap=[^\r\n]*').Value
 if ($CurrentGameDefault -notin $AllowedGameDefaults -or $CurrentServerDefault -notin $AllowedServerDefaults) {
     throw "Unexpected map defaults; refusing an unsafe replacement. Game='$CurrentGameDefault'; Server='$CurrentServerDefault'."
 }
 
-$GameDefaultPattern = [regex]::new('(?m)^GameDefaultMap=.*$')
-$ServerDefaultPattern = [regex]::new('(?m)^ServerDefaultMap=.*$')
+$GameDefaultPattern = [regex]::new('(?m)^GameDefaultMap=[^\r\n]*')
+$ServerDefaultPattern = [regex]::new('(?m)^ServerDefaultMap=[^\r\n]*')
 $UpdatedConfig = $GameDefaultPattern.Replace($ConfigText, "GameDefaultMap=$MapPackage", 1)
 $UpdatedConfig = $ServerDefaultPattern.Replace($UpdatedConfig, "ServerDefaultMap=$MapPackage", 1)
 if ($UpdatedConfig -ne $ConfigText) {

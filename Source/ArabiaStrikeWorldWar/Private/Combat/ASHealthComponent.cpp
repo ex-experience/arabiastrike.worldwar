@@ -8,4 +8,4 @@ void UASHealthComponent::Heal(float Amount){if(!GetOwner()||!GetOwner()->HasAuth
 bool UASHealthComponent::Revive(float HealthFraction){if(!GetOwner()||!GetOwner()->HasAuthority()||!IsDead())return false;Health=FMath::Clamp(MaxHealth*HealthFraction,1.f,MaxHealth);OnHealthChanged.Broadcast(Health,MaxHealth,nullptr);return true;}
 void UASHealthComponent::ResetHealth(){if(!GetOwner()||!GetOwner()->HasAuthority())return;Health=MaxHealth;OnHealthChanged.Broadcast(Health,MaxHealth,nullptr);}
 void UASHealthComponent::OnRep_Health(float OldHealth){OnHealthChanged.Broadcast(Health,MaxHealth,nullptr);if(OldHealth>0.f&&Health<=0.f)OnDeath.Broadcast(nullptr);}
-void UASHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&Out)const{Super::GetLifetimeReplicatedProps(Out);DOREPLIFETIME(UASHealthComponent,Health);}
+void UASHealthComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps)const{Super::GetLifetimeReplicatedProps(OutLifetimeProps);DOREPLIFETIME(UASHealthComponent,Health);}

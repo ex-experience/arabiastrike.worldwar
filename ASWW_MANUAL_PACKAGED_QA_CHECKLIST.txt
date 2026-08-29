@@ -1,0 +1,114 @@
+ARABIA STRIKE WORLD WAR — MANUAL PACKAGED GAMEPLAY QA
+Branch: codex/asww-development
+Packaged EXE: D:\ASWW_STAGE\Windows\ArabiaStrikeWorldWar.exe
+
+Use PASS / FAIL / NOT REACHED for every item.
+
+[ ] 1. BOOT / MAP
+    - Jeddah_RedSea_Assault loads into actual gameplay.
+    - No black screen / empty fallback map / fatal dialog.
+    Result:
+    Notes:
+
+[ ] 2. PLAYER SPAWN / CAMERA
+    - Player character visibly spawns.
+    - Camera follows the player correctly.
+    - Mouse/controller look works.
+    Result:
+    Notes:
+
+[ ] 3. MOVEMENT
+    - Forward/back/left/right work.
+    - Jump works.
+    - Sprint / crouch / other implemented movement works if exposed.
+    - No stuck input.
+    Result:
+    Notes:
+
+[ ] 4. COMBAT
+    - Aim/fire works.
+    - Projectile/hitscan feedback is visible.
+    - Ammo/reload works if implemented.
+    - Damage can be dealt.
+    Result:
+    Notes:
+
+[ ] 5. ENEMY ENCOUNTER
+    - Prototype enemies appear.
+    - At least 3 prototype enemies are observable if the encounter area is reached.
+    - AI reacts/targets/moves instead of remaining inert.
+    Result:
+    Notes:
+
+[ ] 6. DAMAGE / DEATH / RESPAWN
+    - Player can take damage.
+    - Death/downed state behaves correctly.
+    - Respawn returns control to a valid player pawn.
+    Result:
+    Notes:
+
+[ ] 7. HUMMER
+    - Hummer is present.
+    - Interaction/enter vehicle works.
+    - Vehicle movement works.
+    - Turret/fire works if exposed.
+    - Exit vehicle restores the player pawn and camera.
+    Result:
+    Notes:
+
+[ ] 8. HELICOPTER ENCOUNTER
+    - Helicopter encounter is present/reachable.
+    - Expected targeting/combat behavior occurs.
+    Result:
+    Notes:
+
+[ ] 9. COMMAND MECH
+    - Command Mech encounter is present/reachable.
+    - Combat/weak-point behavior works if implemented.
+    Result:
+    Notes:
+
+[ ] 10. MISSION / EXTRACTION
+    - Mission flow is active.
+    - Extraction objective/volume is present/reachable.
+    - Mission can advance toward extraction.
+    Result:
+    Notes:
+
+[ ] 11. HUD / UI
+    - Health is readable.
+    - Ammo/status is readable if implemented.
+    - Mission/respawn state is readable if implemented.
+    - No blocking debug UI.
+    Result:
+    Notes:
+
+[ ] 12. AUDIO / VFX
+    - Weapon/vehicle/combat audio is present where expected.
+    - VFX display without obvious corruption.
+    - No severe frame stalls during effects.
+    Result:
+    Notes:
+
+[ ] 13. STABILITY
+    - No crash during the session.
+    - No unrecoverable freeze.
+    - Closing the game normally returns to PowerShell.
+    Result:
+    Notes:
+
+FINAL MANUAL QA VERDICT:
+BOOT=
+PLAYER_CONTROL=
+COMBAT=
+ENEMIES=
+DEATH_RESPAWN=
+HUMMER=
+HELICOPTER=
+COMMAND_MECH=
+EXTRACTION=
+HUD_AUDIO_VFX=
+STABILITY=
+
+OVERALL=PASS / FAIL / PARTIAL
+FIRST_REAL_BLOCKER=

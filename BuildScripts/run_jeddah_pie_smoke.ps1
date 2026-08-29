@@ -1,8 +1,8 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)][string]$UERoot,
     [string]$ExpectedBranch = "codex/asww-development",
-    [ValidateRange(60, 1800)][int]$TimeoutSeconds = 600
+    [int]$TimeoutSeconds = 600
 )
 
 Set-StrictMode -Version Latest
@@ -19,9 +19,7 @@ $LogRoot = Join-Path $ProjectRoot "Saved\RuntimeEvidence\PIE"
 function Find-FirstFile {
     param([string[]]$Candidates)
     foreach ($Candidate in $Candidates) {
-        if ([IO.File]::Exists($Candidate)) {
-            return $Candidate
-        }
+        if ([IO.File]::Exists($Candidate)) { return $Candidate }
     }
     return $null
 }
@@ -34,16 +32,10 @@ function Test-UnrealPackageFile {
     $Stream = [IO.File]::OpenRead($Path)
     try {
         $Reader = [IO.BinaryReader]::new($Stream)
-        try {
-            return $Reader.ReadUInt32() -eq [Convert]::ToUInt32("9E2A83C1", 16)
-        }
-        finally {
-            $Reader.Dispose()
-        }
+        try { return $Reader.ReadUInt32() -eq [Convert]::ToUInt32("9E2A83C1",16) }
+        finally { $Reader.Dispose() }
     }
-    finally {
-        $Stream.Dispose()
-    }
+    finally { $Stream.Dispose() }
 }
 
 $CurrentBranch = (& git -C $ProjectRoot branch --show-current).Trim()
@@ -80,18 +72,25 @@ if (-not $PythonAutomationPlugin) {
 New-Item -ItemType Directory -Force -Path $LogRoot | Out-Null
 $RunId = Get-Date -Format "yyyyMMdd_HHmmss"
 $LogPath = Join-Path $LogRoot "pie_$RunId.log"
+$ErrPath = Join-Path $LogRoot "pie_$RunId.stderr.log"
 $ReportPath = Join-Path $LogRoot "Report_$RunId"
+
+# Use forward-slash paths for Unreal command-line arguments.
+$ProjectForUE = $ProjectFile.Replace('\','/')
+$ReportForUE = $ReportPath.Replace('\','/')
+
 $Arguments = @(
-    $ProjectFile,
+    $ProjectForUE,
     "-Unattended",
     "-NoSplash",
     "-NoSound",
     "-NullRHI",
     "-NoSourceControl",
-    "-ExecCmds=Automation RunTest Group:ASWWPIE;Quit",
+    "-ExecCmds=Automation RunTest Editor.Python.ArabiaStrikeWorldWar.test_asww_jeddah_pie;Quit",
     "-TestExit=Automation Test Queue Empty",
-    "-ReportExportPath=$ReportPath",
-    "-Log=$LogPath"
+    "-ReportExportPath=$ReportForUE",
+    "-stdout",
+    "-FullStdOutLogOutput"
 )
 
 Write-Output "BRANCH=$CurrentBranch"
@@ -101,9 +100,18 @@ Write-Output "PYTHON_AUTOMATION_TEST_PLUGIN=$PythonAutomationPlugin"
 Write-Output "PIE_SCOPE=STARTUP_POSSESSION_ACTOR_PRESENCE_ONLY"
 Write-Output "COMMAND=`"$UnrealEditorCmd`" $($Arguments -join ' ')"
 Write-Output "PIE_LOG=$LogPath"
+Write-Output "PIE_STDERR=$ErrPath"
 Write-Output "PIE_REPORT=$ReportPath"
 
-$Process = Start-Process -FilePath $UnrealEditorCmd -ArgumentList $Arguments -WorkingDirectory $ProjectRoot -PassThru -WindowStyle Hidden
+$Process = Start-Process `
+    -FilePath $UnrealEditorCmd `
+    -ArgumentList $Arguments `
+    -WorkingDirectory $ProjectRoot `
+    -PassThru `
+    -WindowStyle Hidden `
+    -RedirectStandardOutput $LogPath `
+    -RedirectStandardError $ErrPath
+
 if (-not $Process.WaitForExit($TimeoutSeconds * 1000)) {
     Stop-Process -Id $Process.Id -Force -ErrorAction SilentlyContinue
     $Process.WaitForExit(5000) | Out-Null
@@ -111,18 +119,59 @@ if (-not $Process.WaitForExit($TimeoutSeconds * 1000)) {
     Write-Output "PIE_RESULT=FAIL_TIMEOUT"
     exit 4
 }
+
+# Complete async stdout/stderr drain, then read the real process exit code.
+$Process.WaitForExit()
 $Process.Refresh()
-Write-Output "EDITOR_EXIT_CODE=$($Process.ExitCode)"
-if ($Process.ExitCode -ne 0) {
+
+$EditorExitCode = $null
+try {
+    $EditorExitCode = [int]$Process.ExitCode
+}
+catch {
+    $EditorExitCode = $null
+}
+
+if ($null -eq $EditorExitCode) {
+    Write-Output "EDITOR_EXIT_CODE=NULL"
     Write-Output "PROCESS_CLEANUP=PROCESS_EXITED"
-    Write-Output "PIE_RESULT=FAIL_EDITOR_EXIT_$($Process.ExitCode)"
-    exit $Process.ExitCode
+    Write-Output "PIE_RESULT=FAIL_EDITOR_EXITCODE_UNAVAILABLE"
+    exit 6
+}
+
+Write-Output "EDITOR_EXIT_CODE=$EditorExitCode"
+
+# Append stderr into the evidence log after process exit.
+if ([IO.File]::Exists($ErrPath) -and (Get-Item -LiteralPath $ErrPath).Length -gt 0) {
+    Add-Content -LiteralPath $LogPath -Value "`r`n=== STDERR ==="
+    Get-Content -LiteralPath $ErrPath | Add-Content -LiteralPath $LogPath
+}
+
+if ($EditorExitCode -ne 0) {
+    Write-Output "PROCESS_CLEANUP=PROCESS_EXITED"
+    Write-Output "PIE_RESULT=FAIL_EDITOR_EXIT_$EditorExitCode"
+    exit $EditorExitCode
 }
 
 $LogText = if ([IO.File]::Exists($LogPath)) { Get-Content -Raw -LiteralPath $LogPath } else { "" }
-if ($LogText -notmatch "ASWW_PIE_SMOKE=PASS") {
+
+$PassMarker = $LogText -match "ASWW_PIE_SMOKE=PASS"
+$AutomationSeen = $LogText -match "Automation"
+$ASWWSeen = $LogText -match "ASWW_"
+
+Write-Output "MARKER_ASWW_PIE_SMOKE_PASS=$PassMarker"
+Write-Output "AUTOMATION_OUTPUT_SEEN=$AutomationSeen"
+Write-Output "ASWW_OUTPUT_SEEN=$ASWWSeen"
+
+if (-not $PassMarker) {
     Write-Output "PROCESS_CLEANUP=PROCESS_EXITED"
     Write-Output "PIE_RESULT=FAIL_MISSING_TEST_SUCCESS_MARKER"
+    Write-Output ""
+    Write-Output "=== PIE ROOT CAUSE ==="
+    Select-String -LiteralPath $LogPath `
+        -Pattern "ASWW_|Automation|LogPython:\s*Error|Traceback|RuntimeError:|AttributeError:|TypeError:|Error:|Warning:|failed|missing|PlayerStart|ASGameMode|Possess|spawn|WorldPartition|World Partition" `
+        -Context 4,14 |
+        Select-Object -First 120
     exit 5
 }
 

@@ -13,7 +13,7 @@ AASDynamicEncounterDirector::AASDynamicEncounterDirector()
 void AASDynamicEncounterDirector::BeginPlay()
 {
     Super::BeginPlay();
-    if (HasAuthority()) GetWorldTimerManager().SetTimer(EvaluateTimer, this, &AASDynamicEncounterDirector::TryStartEncounter, EvaluationIntervalSeconds, true, 5.0f);
+    if (HasAuthority()) GetWorldTimerManager().SetTimer(EvaluateTimer, this, &AASDynamicEncounterDirector::EvaluateEncounterTimer, EvaluationIntervalSeconds, true, 5.0f);
 }
 
 const FASDynamicEncounterSpec* AASDynamicEncounterDirector::ChooseEncounter(EASCityDistrict District, int32 Threat) const
@@ -35,6 +35,10 @@ const FASDynamicEncounterSpec* AASDynamicEncounterDirector::ChooseEncounter(EASC
     return nullptr;
 }
 
+void AASDynamicEncounterDirector::EvaluateEncounterTimer()
+{
+    TryStartEncounter();
+}
 bool AASDynamicEncounterDirector::TryStartEncounter()
 {
     if (!HasAuthority()) return false;
