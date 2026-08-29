@@ -75,9 +75,10 @@ $LogPath = Join-Path $LogRoot "pie_$RunId.log"
 $ErrPath = Join-Path $LogRoot "pie_$RunId.stderr.log"
 $ReportPath = Join-Path $LogRoot "Report_$RunId"
 
-# Use forward-slash paths for Unreal command-line arguments.
-$ProjectForUE = $ProjectFile.Replace('\','/')
-$ReportForUE = $ReportPath.Replace('\','/')
+# Start-Process flattens ArgumentList into a Windows command line. Preserve the
+# absolute project and report paths by supplying their required inner quotes.
+$ProjectForUE = '"' + $ProjectFile.Replace('\','/') + '"'
+$ReportForUE = '"' + $ReportPath.Replace('\','/') + '"'
 
 $Arguments = @(
     $ProjectForUE,
@@ -86,8 +87,8 @@ $Arguments = @(
     "-NoSound",
     "-NullRHI",
     "-NoSourceControl",
-    "-ExecCmds=Automation RunTest Editor.Python.ArabiaStrikeWorldWar.test_asww_jeddah_pie;Quit",
-    "-TestExit=Automation Test Queue Empty",
+    '-ExecCmds="Automation RunTest Editor.Python.ArabiaStrikeWorldWar.test_asww_jeddah_pie;Quit"',
+    '-TestExit="Automation Test Queue Empty"',
     "-ReportExportPath=$ReportForUE",
     "-stdout",
     "-FullStdOutLogOutput"
