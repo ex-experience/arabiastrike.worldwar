@@ -15,6 +15,7 @@ class ARABIASTRIKEWORLDWAR_API AASGameMode : public AGameModeBase
 
 public:
     AASGameMode();
+    virtual void StartPlay() override;
 
     virtual void Logout(AController* Exiting) override;
 

@@ -7,6 +7,74 @@
 #include "World/ASWorldEnvironmentDirector.h"
 AASSoldierAIController::AASSoldierAIController(){PrimaryActorTick.bCanEverTick=true;}
 void AASSoldierAIController::AcquireTarget(){Target=nullptr;float Visibility=1.f;if(const AASWorldEnvironmentDirector*Env=Cast<AASWorldEnvironmentDirector>(UGameplayStatics::GetActorOfClass(this,AASWorldEnvironmentDirector::StaticClass())))Visibility=FMath::Clamp(Env->EnvironmentState.VisibilityScalar,0.15f,1.f);float Best=AcquireRadius*Visibility;TArray<AActor*>P;UGameplayStatics::GetAllActorsOfClass(this,ACharacter::StaticClass(),P);for(AActor*A:P){APawn*CandidatePawn=Cast<APawn>(A);if(!CandidatePawn||CandidatePawn==GetPawn()||!CandidatePawn->IsPlayerControlled())continue;float Dist=FVector::Dist(CandidatePawn->GetActorLocation(),GetPawn()->GetActorLocation());if(Dist<Best){Best=Dist;Target=CandidatePawn;}}}
-bool AASSoldierAIController::MoveToTacticalOffset(const FVector&Offset,float Acceptance){if(!Target.IsValid()||!GetPawn())return false;FVector Wanted=Target->GetActorLocation()+Offset;FNavLocation Projected;if(UNavigationSystemV1*Nav=FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld())){if(Nav->ProjectPointToNavigation(Wanted,Projected,FVector(500,500,500))){MoveToLocation(Projected.Location,Acceptance,true,true,true,false,nullptr,true);return true;}}return false;}
-void AASSoldierAIController::UpdateTactics(){AASSoldierCharacter*Soldier=Cast<AASSoldierCharacter>(GetPawn());if(!Soldier||!Target.IsValid())return;UASSquadComponent*Squad=Soldier->GetSquadComponent();const FVector ToTarget=(Target->GetActorLocation()-Soldier->GetActorLocation()).GetSafeNormal2D();const FVector Side=FVector::CrossProduct(FVector::UpVector,ToTarget).GetSafeNormal();const float Dist=FVector::Dist(Target->GetActorLocation(),Soldier->GetActorLocation());if(Squad&&Squad->GetSuppression()>=0.65f){Squad->SetTacticalState(EASTacticalState::Suppressed);MoveToTacticalOffset(-ToTarget*SuppressedFallbackDistance+Side*FMath::RandRange(-350.f,350.f));return;}if(Squad&&Squad->GetRole()==EASSquadRole::Flanker){Squad->SetTacticalState(EASTacticalState::Flank);MoveToTacticalOffset(Side*(FMath::RandBool()?FlankDistance:-FlankDistance)-ToTarget*350.f);return;}if(Dist>FireDistance){if(Squad)Squad->SetTacticalState(EASTacticalState::Advance);MoveToActor(Target.Get(),FireDistance*.75f);}else{if(Squad)Squad->SetTacticalState(EASTacticalState::Hold);StopMovement();}}
-void AASSoldierAIController::Tick(float D){Super::Tick(D);if(!HasAuthority()||!GetPawn())return;if(!Target.IsValid())AcquireTarget();if(!Target.IsValid())return;SetFocus(Target.Get());const double Now=GetWorld()->GetTimeSeconds();if(Now>=NextTacticalUpdate){NextTacticalUpdate=Now+TacticalRepathSeconds;UpdateTactics();}}
+bool AASSoldierAIController::MoveToTacticalOffset(const FVector&Offset,float Acceptance)
+{
+    if(!Target.IsValid()||!GetPawn())return false;
+    const FVector Wanted=Target->GetActorLocation()+Offset;
+    FNavLocation Projected;
+    if(UNavigationSystemV1*Nav=FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld()))
+    {
+        if(Nav->ProjectPointToNavigation(Wanted,Projected,FVector(500,500,500)))
+        {
+            bUseDirectMove=false;
+            MoveToLocation(Projected.Location,Acceptance,true,true,true,false,nullptr,true);
+            return true;
+        }
+    }
+    DirectMoveDestination=Wanted;
+    bUseDirectMove=true;
+    return true;
+}
+void AASSoldierAIController::UpdateTactics()
+{
+    AASSoldierCharacter*Soldier=Cast<AASSoldierCharacter>(GetPawn());
+    if(!Soldier||!Target.IsValid())return;
+    UASSquadComponent*Squad=Soldier->GetSquadComponent();
+    const FVector ToTarget=(Target->GetActorLocation()-Soldier->GetActorLocation()).GetSafeNormal2D();
+    const FVector Side=FVector::CrossProduct(FVector::UpVector,ToTarget).GetSafeNormal();
+    const float Dist=FVector::Dist(Target->GetActorLocation(),Soldier->GetActorLocation());
+    if(Squad&&Squad->GetSuppression()>=0.65f)
+    {
+        Squad->SetTacticalState(EASTacticalState::Suppressed);
+        MoveToTacticalOffset(-ToTarget*SuppressedFallbackDistance+Side*FMath::RandRange(-350.f,350.f));
+        return;
+    }
+    if(Squad&&Squad->GetRole()==EASSquadRole::Flanker)
+    {
+        Squad->SetTacticalState(EASTacticalState::Flank);
+        MoveToTacticalOffset(Side*(FMath::RandBool()?FlankDistance:-FlankDistance)-ToTarget*350.f);
+        return;
+    }
+    if(Dist>FireDistance)
+    {
+        if(Squad)Squad->SetTacticalState(EASTacticalState::Advance);
+        MoveToTacticalOffset(-ToTarget*FireDistance*.65f,FireDistance*.2f);
+    }
+    else
+    {
+        if(Squad)Squad->SetTacticalState(EASTacticalState::Hold);
+        bUseDirectMove=false;
+        StopMovement();
+    }
+}
+void AASSoldierAIController::Tick(float D)
+{
+    Super::Tick(D);
+    if(!HasAuthority()||!GetPawn())return;
+    if(!Target.IsValid())AcquireTarget();
+    if(!Target.IsValid())return;
+    SetFocus(Target.Get());
+    const double Now=GetWorld()->GetTimeSeconds();
+    if(Now>=NextTacticalUpdate)
+    {
+        NextTacticalUpdate=Now+TacticalRepathSeconds;
+        UpdateTactics();
+    }
+    if(bUseDirectMove)
+    {
+        FVector ToDestination=DirectMoveDestination-GetPawn()->GetActorLocation();
+        ToDestination.Z=0.f;
+        if(ToDestination.SizeSquared2D()>FMath::Square(140.f)) GetPawn()->AddMovementInput(ToDestination.GetSafeNormal(),.55f,true);
+        else bUseDirectMove=false;
+    }
+}

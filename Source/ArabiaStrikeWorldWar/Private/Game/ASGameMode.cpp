@@ -4,9 +4,13 @@
 #include "Player/ASPlayerCharacterV2.h"
 #include "Player/ASPlayerController.h"
 #include "Player/ASPlayerState.h"
+#include "Offline/ASOfflineDirector.h"
+#include "Offline/ASOfflineHUD.h"
+#include "Offline/ASOfflineLivingCityDirector.h"
 #include "GameFramework/GameStateBase.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
+#include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 
 AASGameMode::AASGameMode()
@@ -15,6 +19,25 @@ AASGameMode::AASGameMode()
     PlayerControllerClass = AASPlayerController::StaticClass();
     PlayerStateClass = AASPlayerState::StaticClass();
     GameStateClass = AASGameState::StaticClass();
+    HUDClass = AASOfflineHUD::StaticClass();
+}
+
+void AASGameMode::StartPlay()
+{
+    Super::StartPlay();
+    if (!HasAuthority() || !GetWorld()) return;
+
+    if (!UGameplayStatics::GetActorOfClass(this, AASOfflineDirector::StaticClass()))
+    {
+        GetWorld()->SpawnActor<AASOfflineDirector>(
+            AASOfflineDirector::StaticClass(), FVector::ZeroVector, FRotator::ZeroRotator);
+    }
+    if (!UGameplayStatics::GetActorOfClass(this, AASOfflineLivingCityDirector::StaticClass()))
+    {
+        GetWorld()->SpawnActor<AASOfflineLivingCityDirector>(
+            AASOfflineLivingCityDirector::StaticClass(), FVector::ZeroVector, FRotator::ZeroRotator);
+    }
+    UE_LOG(LogTemp, Warning, TEXT("ASWW_OFFLINE_GAME_MODE_READY gameMode=%s"), *GetClass()->GetName());
 }
 
 void AASGameMode::Logout(AController* Exiting)

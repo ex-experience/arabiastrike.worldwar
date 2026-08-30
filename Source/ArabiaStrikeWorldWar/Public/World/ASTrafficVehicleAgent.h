@@ -3,6 +3,7 @@
 #include "GameFramework/Actor.h"
 #include "ASTrafficVehicleAgent.generated.h"
 class AASTrafficRoute;
+class UStaticMeshComponent;
 UENUM(BlueprintType) enum class EASTrafficBehavior : uint8 { Normal, Yielding, Evacuating, Stopped };
 
 UCLASS()
@@ -11,7 +12,11 @@ class ARABIASTRIKEWORLDWAR_API AASTrafficVehicleAgent : public AActor
     GENERATED_BODY()
 public:
     AASTrafficVehicleAgent();
+    virtual void BeginPlay() override;
     virtual void Tick(float DeltaSeconds) override;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Traffic")
+    TObjectPtr<UStaticMeshComponent> VehicleMesh;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Traffic") float CruiseSpeedCmPerSecond = 1400.0f;
     UPROPERTY(BlueprintReadOnly, Category="Traffic") TObjectPtr<AASTrafficRoute> AssignedRoute;
