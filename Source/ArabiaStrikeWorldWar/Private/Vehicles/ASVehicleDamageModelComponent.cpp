@@ -6,4 +6,4 @@ void UASVehicleDamageModelComponent::BeginPlay(){Super::BeginPlay();if(UASHealth
 float UASVehicleDamageModelComponent::ResolveDamageMultiplier(FName Name)const{for(const auto&Z:Zones)if(Z.BoneOrZone==Name)return FMath::Max(0.f,Z.DamageMultiplier);return 1.f;}
 void UASVehicleDamageModelComponent::HandleHealthChanged(float Health,float MaxHealth,AActor*){if(!GetOwner()||!GetOwner()->HasAuthority()||MaxHealth<=0.f)return;const float R=Health/MaxHealth;bCriticalDamage=R<=0.35f;bEngineDisabled=R<=0.12f;OnRep_DamageState();}
 void UASVehicleDamageModelComponent::OnRep_DamageState(){}
-void UASVehicleDamageModelComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&Out)const{Super::GetLifetimeReplicatedProps(Out);DOREPLIFETIME(UASVehicleDamageModelComponent,bEngineDisabled);DOREPLIFETIME(UASVehicleDamageModelComponent,bCriticalDamage);}
+void UASVehicleDamageModelComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps)const{Super::GetLifetimeReplicatedProps(OutLifetimeProps);DOREPLIFETIME(UASVehicleDamageModelComponent,bEngineDisabled);DOREPLIFETIME(UASVehicleDamageModelComponent,bCriticalDamage);}

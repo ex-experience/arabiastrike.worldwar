@@ -1,7 +1,7 @@
 name: repository-preflight
 on:
   push:
-    branches: [main, develop, 'feature/**']
+    branches: [main, develop, 'feature/**', 'codex/**']
   pull_request:
 permissions:
   contents: read
@@ -21,3 +21,18 @@ jobs:
         run: python ci/preflight_phase2.py
       - name: Phase 3 tactical warfare gate
         run: python ci/preflight_phase3.py
+      - name: Phase 4 world gate
+        run: python ci/preflight_phase4.py
+      - name: Phase 5 living city gate
+        run: python ci/preflight_phase5.py
+      - name: Static C++ sanity gate
+        run: python ci/static_cpp_sanity.py
+      - name: Web delivery gate
+        run: python ci/preflight_web_delivery.py
+      - name: Native delivery structure gate
+        run: python ci/preflight_native_delivery.py
+      - name: Repository security gate
+        run: python ci/security_static_audit.py
+      - name: PowerShell parse and safety baseline
+        shell: pwsh
+        run: ./ci/powershell_sanity.ps1

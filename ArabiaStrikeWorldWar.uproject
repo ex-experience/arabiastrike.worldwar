@@ -37,7 +37,19 @@
     },
     {
       "Name": "PixelStreaming2",
-      "Enabled": false
+      "Enabled": true
+    },
+    {
+      "Name": "PythonScriptPlugin",
+      "Enabled": true
+    },
+    {
+      "Name": "EditorScriptingUtilities",
+      "Enabled": true
+    },
+    {
+      "Name": "PythonAutomationTest",
+      "Enabled": true
     },
     {
       "Name": "GameplayAbilities",

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "ASVehiclePawn.generated.h"
@@ -11,8 +11,8 @@ class ARABIASTRIKEWORLDWAR_API AASVehiclePawn : public APawn
 public:
     AASVehiclePawn();
     virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly) bool ReserveSeat(APlayerState* PlayerState, int32 SeatIndex);
-    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly) void ReleaseSeatsFor(APlayerState* PlayerState);
+    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly) bool ReserveSeat(APlayerState* InPlayerState, int32 SeatIndex);
+    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly) void ReleaseSeatsFor(APlayerState* InPlayerState);
 
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly) TObjectPtr<UASHealthComponent> Health;

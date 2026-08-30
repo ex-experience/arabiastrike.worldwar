@@ -26,11 +26,11 @@ The repository contains no third-party game assets, copied maps, characters, mus
 - Dedicated server target
 - Online Services Null for local/backend-free testing
 - EOS plugins present but disabled until credentials/product setup exists
-- Pixel Streaming 2 present but disabled until cloud-streaming deployment
+- Pixel Streaming 2 is enabled in the project descriptor; real plugin/build verification remains gated by a complete Win64 C++ toolchain, and no streaming backend is configured
 
 ## Start
 
-Open `ArabiaStrikeWorldWar.uproject` in Unreal Engine 5.8, compile, create an Open World level at `/Game/Maps/Jeddah_RedSea_Assault`, set its GameMode to `ASGameMode`, then follow `docs/JEDDAH_VERTICAL_SLICE.md`.
+Run the gated UE 5.8 pipeline documented in `docs/BUILD_AND_RUN.md`. It compiles first, then uses Unreal Editor automation to create and validate the real World Partition level at `/Game/Maps/Jeddah_RedSea_Assault`; map defaults are not promoted until Editor validation passes.
 
 Run repository-only checks with:
 
@@ -39,6 +39,14 @@ python ci/preflight.py
 ```
 
 See `docs/BUILD_AND_RUN.md` for client/server build commands.
+
+When a complete UE 5.8 or 5.8.1 installation becomes available, resume the blocked real-build pipeline with:
+
+```powershell
+.\BuildScripts\resume_after_ue58.ps1
+```
+
+Runtime results must follow `RuntimeEvidence/README.md`; no compile, PIE, multiplayer, package or Pixel Streaming success is inferred from repository checks. Production online prerequisites and the current binary-asset queue are tracked in `docs/ONLINE_PRODUCTION_READINESS.md` and `docs/ASSET_GAP_INVENTORY.md`.
 
 
 ## Phase 2 — Playable Combat Foundation

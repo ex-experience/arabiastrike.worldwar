@@ -6,4 +6,4 @@ AASBossWeakPoint::AASBossWeakPoint(){bReplicates=true;HitBox=CreateDefaultSubobj
 void AASBossWeakPoint::BeginPlay(){Super::BeginPlay();Health=MaxHealth;if(HasAuthority())if(AASBossCharacter*Boss=Cast<AASBossCharacter>(GetOwner()))Boss->RegisterWeakPoint(this);}
 float AASBossWeakPoint::TakeDamage(float Amount,FDamageEvent const&,AController*,AActor*){if(!HasAuthority()||Amount<=0.f||Health<=0.f)return 0.f;const float Applied=FMath::Min(Amount,Health);Health-=Applied;OnRep_Health();if(Health<=0.f)if(AASBossCharacter*Boss=Cast<AASBossCharacter>(GetOwner()))Boss->NotifyWeakPointDestroyed(this);return Applied;}
 void AASBossWeakPoint::OnRep_Health(){SetActorHiddenInGame(Health<=0.f);SetActorEnableCollision(Health>0.f);}
-void AASBossWeakPoint::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&Out)const{Super::GetLifetimeReplicatedProps(Out);DOREPLIFETIME(AASBossWeakPoint,Health);}
+void AASBossWeakPoint::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps)const{Super::GetLifetimeReplicatedProps(OutLifetimeProps);DOREPLIFETIME(AASBossWeakPoint,Health);}

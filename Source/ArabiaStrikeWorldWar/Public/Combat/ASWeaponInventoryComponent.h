@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "ASWeaponInventoryComponent.generated.h"
@@ -20,7 +20,7 @@ public:
     UFUNCTION(BlueprintCallable) void RequestEquipSlot(int32 SlotIndex);
     UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly) bool AddWeapon(UASWeaponDefinition* Definition, bool bAutoEquip=true);
     UFUNCTION(BlueprintPure) int32 GetEquippedSlot() const { return EquippedSlot; }
-    UFUNCTION(BlueprintPure) const TArray<TObjectPtr<UASWeaponDefinition>>& GetLoadout() const { return Loadout; }
+    const TArray<TObjectPtr<UASWeaponDefinition>>& GetLoadout() const { return Loadout; }
 
 protected:
     UPROPERTY(EditDefaultsOnly, Category="Loadout") TArray<TObjectPtr<UASWeaponDefinition>> StartingLoadout;

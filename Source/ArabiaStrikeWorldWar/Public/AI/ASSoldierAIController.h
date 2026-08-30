@@ -16,6 +16,8 @@ protected:
     UPROPERTY(EditDefaultsOnly) float FlankDistance=950.f;
     UPROPERTY(EditDefaultsOnly) float SuppressedFallbackDistance=700.f;
     TWeakObjectPtr<APawn> Target;
+    FVector DirectMoveDestination=FVector::ZeroVector;
+    bool bUseDirectMove=false;
     double NextTacticalUpdate=0.0;
     void AcquireTarget();
     void UpdateTactics();

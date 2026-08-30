@@ -1,0 +1,40 @@
+version: 1
+architecture: EnhancedInput
+presets:
+  - EX Hybrid
+  - Military FPS
+  - Open World
+  - Cyber Action
+  - Stealth Hacker
+  - Custom
+contexts:
+  - IMC_OnFoot
+  - IMC_Combat
+  - IMC_Vehicle
+  - IMC_Hacking
+  - IMC_UI
+defaults:
+  move_forward: W
+  move_back: S
+  move_left: A
+  move_right: D
+  look: Mouse
+  fire: LeftMouseButton
+  aim: RightMouseButton
+  sprint: LeftShift
+  jump_context: SpaceBar
+  crouch_slide: LeftControl
+  prone: Z
+  lean_left: Q
+  lean_right: E
+  reload: R
+  interact: F
+  melee: V
+  grenade: G
+  tactical: X
+  scan_hack: CapsLock
+  weapon_wheel: Tab
+  ping: MiddleMouseButton
+  map: M
+  inventory: I
+  pause: Escape

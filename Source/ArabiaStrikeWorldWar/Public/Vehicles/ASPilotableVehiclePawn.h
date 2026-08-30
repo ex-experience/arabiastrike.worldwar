@@ -3,7 +3,7 @@
 #include "Vehicles/ASVehiclePawn.h"
 #include "Interaction/ASInteractable.h"
 #include "ASPilotableVehiclePawn.generated.h"
-class UFloatingPawnMovement; class UStaticMeshComponent; class UASVehicleTurretComponent; class UASVehicleDamageModelComponent;
+class UCameraComponent; class UFloatingPawnMovement; class USpringArmComponent; class UStaticMeshComponent; class UASVehicleTurretComponent; class UASVehicleDamageModelComponent;
 UCLASS()
 class ARABIASTRIKEWORLDWAR_API AASPilotableVehiclePawn : public AASVehiclePawn, public IASInteractable
 {
@@ -16,11 +16,13 @@ public:
     UFUNCTION(BlueprintCallable) void ExitVehicle();
 protected:
     UPROPERTY(VisibleAnywhere) TObjectPtr<UStaticMeshComponent> Body;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<USpringArmComponent> CameraBoom;
+    UPROPERTY(VisibleAnywhere) TObjectPtr<UCameraComponent> DriveCamera;
     UPROPERTY(VisibleAnywhere) TObjectPtr<UFloatingPawnMovement> DriveMovement;
     UPROPERTY(VisibleAnywhere) TObjectPtr<UASVehicleTurretComponent> Turret;
     UPROPERTY(VisibleAnywhere) TObjectPtr<UASVehicleDamageModelComponent> DamageModel;
     UPROPERTY(EditDefaultsOnly) float TurnRate=65.f;
     UPROPERTY() TObjectPtr<APawn> StoredDriverPawn;
     void Throttle(float V); void Steer(float V); void FireTurret(); void AimTurret(float Value);
-    UFUNCTION(Server,Reliable) void ServerExit(APlayerController* Controller);
+    UFUNCTION(Server,Reliable) void ServerExit(APlayerController* InController);
 };

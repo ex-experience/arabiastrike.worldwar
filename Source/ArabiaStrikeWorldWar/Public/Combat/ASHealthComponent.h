@@ -21,6 +21,7 @@ public:
     UFUNCTION(BlueprintPure) bool IsDead() const { return Health <= 0.f; }
     UFUNCTION(BlueprintCallable) void Heal(float Amount);
     UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly) bool Revive(float HealthFraction=0.35f);
+    UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly) void ResetHealth();
 protected:
     virtual void BeginPlay() override;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Health", meta=(ClampMin="1.0")) float MaxHealth = 100.f;

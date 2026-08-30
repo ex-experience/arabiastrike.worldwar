@@ -35,5 +35,7 @@ public:
 private:
     FTimerHandle EvaluateTimer;
     TArray<TWeakObjectPtr<AActor>> ActiveEncounters;
+    void EvaluateEncounterTimer();
+
     const FASDynamicEncounterSpec* ChooseEncounter(EASCityDistrict District, int32 Threat) const;
 };

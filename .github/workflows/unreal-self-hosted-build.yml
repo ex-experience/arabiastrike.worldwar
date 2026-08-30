@@ -21,6 +21,13 @@ jobs:
           python ci/preflight.py
           python ci/preflight_phase2.py
           python ci/preflight_phase3.py
+          python ci/preflight_phase4.py
+          python ci/preflight_phase5.py
+          python ci/static_cpp_sanity.py
+          python ci/preflight_native_delivery.py
+          python ci/preflight_web_delivery.py
+          python ci/security_static_audit.py
+          powershell -NoProfile -ExecutionPolicy Bypass -File ci/powershell_sanity.ps1
       - name: Build client
         shell: powershell
         run: .\BuildScripts\build_win64.ps1 -UERoot "$env:UE_ROOT"
@@ -36,6 +43,19 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Preflight
+        shell: powershell
+        run: |
+          python ci/preflight.py
+          python ci/preflight_phase2.py
+          python ci/preflight_phase3.py
+          python ci/preflight_phase4.py
+          python ci/preflight_phase5.py
+          python ci/static_cpp_sanity.py
+          python ci/preflight_native_delivery.py
+          python ci/preflight_web_delivery.py
+          python ci/security_static_audit.py
+          powershell -NoProfile -ExecutionPolicy Bypass -File ci/powershell_sanity.ps1
       - name: Build dedicated server
         shell: powershell
         run: .\BuildScripts\build_server_win64.ps1 -UERoot "$env:UE_ROOT"
